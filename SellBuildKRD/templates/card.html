@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ sell.0.nameSell }}{% endblock %}
+{% block header %}{{ sell.0.nameSell }}{% endblock %}
+{% block content %}
+
+<p>{{ sell.0.address }}</p>
+<p>{{ sell.0.specifications }}</p>
+<p>{{ sell.0.price }}</p>
+<p>{{ sell.0.telephone }} {{ sell.0.author }} </p>
+<p>{{ sell.0.pub_date }}</p>
+
+{% endblock %}

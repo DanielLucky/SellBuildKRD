@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block header %}Последние обновления на сайте{% endblock %}
+{% block content %}
+
+{% for sell in sells %}
+    <a href={{sell.pk}}><h3>{{ sell.nameSell}}</h3></a>
+    <p>{{ sell.specifications | truncatewords:40}}</p>
+    <p>Менеджер: <a href={{sell.author}}>{{ sell.author }}</a>, дата публикации: {{ sell.pub_date|date:"Y-m-d H:i:s" }}</p>
+
+{% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
+
+{% endblock %}

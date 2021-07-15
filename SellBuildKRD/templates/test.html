@@ -1,0 +1,50 @@
+{% for sell in sells %}
+<a href={{sell.pk}}>
+    <h3>{{ sell.nameSell}}</h3>
+</a>
+<p>{{ sell.specifications | truncatewords:40}}</p>
+<p>Менеджер: <a href={{sell.author}}>{{ sell.author }}</a>, дата публикации: {{ sell.pub_date|date:"Y-m-d H:i:s" }}</p>
+
+
+{% for sell in sells %}
+
+<div class=" card ts-item ts-item__list ts-card ">
+
+    <a href="{{sell.pk}}" class="card-img " data-bg-image="assets/img/img-item-thumb-01.jpg " style="background-image: url(&quot;assets/img/img-item-thumb-01.jpg&quot;); "></a>
+
+    <div class="card-body ">
+        <figure class="ts-item__info ">
+            <h4>{{ sell.nameSell }}</h4>
+            <aside>
+                <i class="fa fa-map-marker mr-2 "></i> {{ sell.address }}
+            </aside>
+        </figure>
+
+        <div class="ts-item__info-badge ">
+            ₽{{sell.price}}
+        </div>
+
+        <div class="ts-description-lists ">
+            <dl>
+                <dt>Площадь</dt>
+                <dd>325m<sup>2</sup></dd>
+            </dl>
+            <dl>
+                <dt>Кол-во комнат</dt>
+                <dd>2</dd>
+            </dl>
+            <dl>
+                <dt>Bathrooms</dt>
+                <dd>1</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!--Card Footer-->
+    <a href="{{sell.pk}}" ass="card-footer ">
+        <span class="ts-btn-arrow ">еще</span>
+    </a>
+
+</div>
+
+{% endfor %}

@@ -1,0 +1,168 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    {% load static %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
+
+    <title>Продажа в КРД</title>
+
+
+    <body>
+
+        <!-- WRAPPER
+    =================================================================================================================-->
+        <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+            <!--*********************************************************************************************************-->
+            <!--HEADER **************************************************************************************************-->
+            <!--*********************************************************************************************************-->
+
+            <!--end Header-->
+
+            <!--*********************************************************************************************************-->
+            <!-- MAIN ***************************************************************************************************-->
+            <!--*********************************************************************************************************-->
+
+            <main id="ts-main" style="margin-top: 114px;">
+                <div class="ts-bokeh-background"><canvas id="ts-canvas"></canvas></div>
+
+                <!--BREADCRUMB
+            =========================================================================================================-->
+
+
+                <!--PAGE TITLE
+            =========================================================================================================-->
+                <section id="page-title">
+                    <div class="container">
+
+                        <div class="ts-title">
+                            <h1>Продажа недвижимости в Краснодарском крае</h1>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!--ITEMS AND SIDEBAR
+            =========================================================================================================-->
+                <section id="items-grid-and-sidebar">
+                    <div class="container">
+                        <div class="row">
+
+                            <!--LEFT SIDE (SIDEBAR)
+                        =============================================================================================-->
+
+                            <!--end Right Side / col-md-4-->
+
+                            <!--RIGHT SIDE (ITEMS)
+                        =============================================================================================-->
+                            <div class="col-md-8">
+
+                                <!--DISPLAY CONTROL
+                            =========================================================================================-->
+
+
+                                <!--ITEMS LIST
+                            =========================================================================================-->
+                                <section id="ts-items-list" style="width: 1000px;">
+
+
+                                    {% for sell in sells %}
+
+                                    <div class=" card ts-item ts-item__list ts-card ">
+
+                                        <a href="{{sell.pk}}" class="card-img " data-bg-image="assets/img/img-item-thumb-01.jpg" style="background-image: url(&quot;assets/img/img-item-thumb-01.jpg&quot;); "></a>
+
+                                        <div class="card-body ">
+                                            <figure class="ts-item__info ">
+                                                <h4>{{ sell.nameSell }} </h4> <p>{{sell.telephone | phone2numeric}}</p>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2 "></i> {{ sell.address }}
+                                                </aside>
+                                            </figure>
+
+
+                                            <div class="ts-item__info-badge ">
+                                                ₽ {{sell.price}}
+                                            </div>
+
+                                            <div class="ts-description-lists ">
+                                                <dl>
+                                                    <dt>Площадь</dt>
+                                                    <dd>{{sell.totalArea}}м<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Жилая пл.</dt>
+                                                    <dd>{{sell.livingArea}}м<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Пл. Кухни</dt>
+                                                    <dd>{{sell.kitchenArea}}м<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Кол-во комнат</dt>
+                                                    <dd>{{sell.numberOf_rooms}}</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Этаж/Из</dt>
+                                                    <dd>{{sell.floor}} / {{sell.totalFloor}}</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Отделка</dt>
+                                                    <dd>{{sell.furnish}}</dd>
+                                                </dl>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--Card Footer-->
+                          <a href="{{sell.pk}}" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Еще</span>
+                                </a>
+
+
+                                    </div>
+
+                                    {% endfor %}
+
+                                </section>
+                                <!--end row-->
+
+                                <!--PAGINATION
+                            =========================================================================================-->
+
+                </section>
+
+                </div>
+                <!--end Right Side / col-md-8-->
+
+                </div>
+                <!--end row-->
+                </div>
+                <!--end container-->
+                </section>
+                <!--end #items-list-->
+
+            </main>
+            <!--end #ts-main-->
+        </div>
+        <!--end page-->
+
+        <script src="assets/js/jquery-3.3.1.min.js "></script>
+        <script src="assets/js/popper.min.js "></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js "></script>
+        <script src="http://maps.google.com/maps/api/js "></script>
+        <script src="assets/js/leaflet.js "></script>
+        <script src="assets/js/custom.js "></script>
+        <script src="assets/js/map-leaflet.js "></script>
+
+
+
+
+    </body>
