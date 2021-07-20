@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    {% load static %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
+
+	<title>Личный кабинет</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <header id="ts-header" class="fixed-top">
+
+    </header>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+
+                <div class="ts-title">
+                    <h1>Личный кабинет, {{ request.user }}</h1>
+                    <h3><a href="/account/logout">Logout</a></h3>
+                </div>
+
+            </div>
+        </section>
+
+        <!--AGENCY INFO
+            =========================================================================================================-->
+        <section id="agency-info">
+            <div class="container">
+
+                <!--Box-->
+                <div class="ts-box">
+
+
+
+                    <!--Row-->
+                    <div class="row">
+
+                        <!--Description-->
+                        <div class="col-md-8">
+
+                            <div class="py-4">
+
+                                <!--Title-->
+                                <div class="ts-title mb-2">
+                                    <h2 class="mb-1">Weston Properties</h2>
+                                    <h5>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        London
+                                    </h5>
+                                </div>
+
+                                <!--Row-->
+                                <div class="row">
+
+                                    <div class="col-md-7">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat
+                                            tempor sapien. In lobortis posuere tincidunt. Curabitur malesuada tempus
+                                            ligula nec maximus.
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-5 ts-opacity__50">
+
+                                        <!--Phone-->
+                                        <figure class="mb-1">
+                                            <i class="fa fa-phone-square mr-2"></i>
+                                            +1 602-862-1673
+                                        </figure>
+
+                                        <!--Mail-->
+                                        <figure class="mb-1">
+                                            <i class="fa fa-envelope mr-2"></i>
+                                            <a href="#">weston@example.com</a>
+                                        </figure>
+
+                                        <!--Skype-->
+                                        <figure class="mb-0">
+                                            <i class="fab fa-skype mr-2"></i>
+                                            weston.properties
+                                        </figure>
+
+                                    </div>
+
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end p-4-->
+
+                        </div>
+                        <!--end col-md-8-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end ts-box-->
+
+            </div>
+            <!--end container-->
+        </section>
+        <!--end #agency-info-->
+
+        <!--ITEMS LISTING & SEARCH
+            =========================================================================================================-->
+        <section id="items-listing-and-search">
+            <div class="container">
+                <div class="row flex-wrap-reverse">
+
+                    <!--LEFT SIDE
+                        =============================================================================================-->
+                    <div class="col-md-8">
+
+
+                        <!--TAB CONTENT
+                            =========================================================================================-->
+                        <div class="tab-content">
+
+                            <!--PROPERTIES TAB
+                                =====================================================================================-->
+                            <div class="tab-pane active" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+
+                                <!--DISPLAY CONTROL
+                                    =================================================================================-->
+                                <section id="display-control-items">
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <!--end container-->
+                                </section>
+
+                                <!--ITEMS LISTING
+                                    =================================================================================-->
+                                <section id="items-listing">
+                                    <!--Item-->
+                                    {% for target in targets %}
+                                    <div class="card ts-item ts-item__list ts-card">
+
+
+                                        <!--Card Image-->
+                                        <a href="detail-01.html" class="card-img" data-bg-image="assets/img/img-item-thumb-01.jpg"></a>
+
+                                        <!--Card Body-->
+                                        <div class="card-body">
+
+                                            <figure class="ts-item__info">
+                                                <h4>{{ target.nameSell }}</h4>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2"></i>
+                                                    1350 Arbutus Drive
+                                                </aside>
+                                            </figure>
+
+                                            <div class="ts-item__info-badge">
+                                                $350,000
+                                            </div>
+
+                                            <div class="ts-description-lists">
+                                                <dl>
+                                                    <dt>Area</dt>
+                                                    <dd>325m<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bedrooms</dt>
+                                                    <dd>2</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bathrooms</dt>
+                                                    <dd>1</dd>
+                                                </dl>
+                                            </div>
+
+                                        </div>
+
+                                        <!--Card Footer-->
+                                        <a href="detail-01.html" class="card-footer">
+                                            <span class="ts-btn-arrow">Detail</span>
+                                        </a>
+
+                                    </div>
+{% endfor %}
+
+                                </section>
+
+                            </div>
+                            <!--end #properties-->
+
+                            <!--AGENTS TAB
+                                =====================================================================================-->
+                            <div class="tab-pane" id="agents" role="tabpanel" aria-labelledby="agents-tab">
+
+                                <!--DISPLAY CONTROL
+                                    =================================================================================-->
+                                <section id="display-control-agents">
+                                    <div class="clearfix">
+
+                                        <!--Display selector on the left-->
+                                        <div class="float-left">
+                                            <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
+                                                <i class="fa fa-th-large"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
+                                                <i class="fa fa-th-list"></i>
+                                            </a>
+                                        </div>
+
+                                        <!--Display selector on the right-->
+                                        <div class="float-none float-sm-right pl-2 ts-center__vertical">
+                                            <select class="custom-select bg-transparent" id="sorting-agents" name="sorting">
+                                                <option value="">Default</option>
+                                                <option value="1">Name</option>
+                                                <option value="2">Number of properties</option>
+                                                <option value="3">Distance</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <!--end container-->
+                                </section>
+
+                                <!--AGENTS LISTING
+                                    =================================================================================-->
+                                <section id="agents-listing">
+                                    <div class="row">
+
+                                        <!--Person-->
+                                        <div class="col-md-6">
+                                            <div class="card ts-person ts-card">
+
+                                                <!--Ribbon-->
+                                                <div class="ts-ribbon">
+                                                    <i class="fa fa-thumbs-up"></i>
+                                                </div>
+
+                                                <!--Image-->
+                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="assets/img/img-person-01.jpg">
+                                                    <div class="ts-item__info-badge">
+                                                        <span>23 Properties</span>
+                                                    </div>
+                                                </a>
+
+                                                <!--Body-->
+                                                <div class="card-body">
+
+                                                    <figure class="ts-item__info">
+                                                        <h4>Jane Harwood</h4>
+                                                        <aside>
+                                                            <i class="fa fa-map-marker mr-2"></i>
+                                                            London
+                                                        </aside>
+                                                    </figure>
+
+                                                    <dl>
+                                                        <dt>Phone</dt>
+                                                        <dd>+1 602-862-1673</dd>
+                                                        <dt>Email</dt>
+                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
+                                                    </dl>
+
+                                                </div>
+
+                                                <!--Footer-->
+                                                <a href="agent-detail-01.html" class="card-footer">
+                                                    <span class="ts-btn-arrow">Detail</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <!--end col-md-3-->
+
+                                        <!--Person-->
+                                        <div class="col-md-6">
+                                            <div class="card ts-person ts-card">
+
+                                                <!--Ribbon-->
+                                                <div class="ts-ribbon">
+                                                    <i class="fa fa-thumbs-up"></i>
+                                                </div>
+
+                                                <!--Image-->
+                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="assets/img/img-person-02.jpg">
+                                                    <div class="ts-item__info-badge">
+                                                        <span>41 Properties</span>
+                                                    </div>
+                                                </a>
+
+                                                <!--Body-->
+                                                <div class="card-body">
+
+                                                    <figure class="ts-item__info">
+                                                        <h4>Jackie Kinsey</h4>
+                                                        <aside>
+                                                            <i class="fa fa-map-marker mr-2"></i>
+                                                            New York
+                                                        </aside>
+                                                    </figure>
+
+                                                    <dl>
+                                                        <dt>Phone</dt>
+                                                        <dd>+1 602-862-1673</dd>
+                                                        <dt>Email</dt>
+                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
+                                                    </dl>
+
+                                                </div>
+
+                                                <!--Footer-->
+                                                <a href="agent-detail-01.html" class="card-footer">
+                                                    <span class="ts-btn-arrow">Detail</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <!--end col-md-3-->
+
+                                        <!--Person-->
+                                        <div class="col-md-6">
+                                            <div class="card ts-person ts-card">
+
+                                                <!--Image-->
+                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="assets/img/img-person-03.jpg">
+                                                    <div class="ts-item__info-badge">
+                                                        <span>16 Properties</span>
+                                                    </div>
+                                                </a>
+
+                                                <!--Body-->
+                                                <div class="card-body">
+
+                                                    <figure class="ts-item__info">
+                                                        <h4>Adam Price</h4>
+                                                        <aside>
+                                                            <i class="fa fa-map-marker mr-2"></i>
+                                                            Paris
+                                                        </aside>
+                                                    </figure>
+
+                                                    <dl>
+                                                        <dt>Phone</dt>
+                                                        <dd>+1 602-862-1673</dd>
+                                                        <dt>Email</dt>
+                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
+                                                    </dl>
+
+                                                </div>
+
+                                                <!--Footer-->
+                                                <a href="agent-detail-01.html" class="card-footer">
+                                                    <span class="ts-btn-arrow">Detail</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <!--end col-md-3-->
+
+                                        <!--Person-->
+                                        <div class="col-md-6">
+                                            <div class="card ts-person ts-card">
+
+                                                <!--Image-->
+                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="assets/img/img-person-04.jpg">
+                                                    <div class="ts-item__info-badge">
+                                                        <span>28 Properties</span>
+                                                    </div>
+                                                </a>
+
+                                                <!--Body-->
+                                                <div class="card-body">
+
+                                                    <figure class="ts-item__info">
+                                                        <h4>Edward Palmer</h4>
+                                                        <aside>
+                                                            <i class="fa fa-map-marker mr-2"></i>
+                                                            Berlin
+                                                        </aside>
+                                                    </figure>
+
+                                                    <dl>
+                                                        <dt>Phone</dt>
+                                                        <dd>+1 602-862-1673</dd>
+                                                        <dt>Email</dt>
+                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
+                                                    </dl>
+
+                                                </div>
+
+                                                <!--Footer-->
+                                                <a href="agent-detail-01.html" class="card-footer">
+                                                    <span class="ts-btn-arrow">Detail</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <!--end col-md-3-->
+
+                                    </div>
+                                    <!--end row-->
+                                </section>
+
+
+                            </div>
+                            <!--end #agents-->
+
+                        </div>
+                        <!--end tab-content-->
+
+                    </div>
+                    <!--end col-md-8 / left side -->
+
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+</div>
+<!--end page-->
+
+        <script src='{% static "assets/js/jquery-3.3.1.min.js " %}'></script>
+        <script src='{% static "assets/js/popper.min.js " %}'></script>
+        <script src='{% static "assets/bootstrap/js/bootstrap.min.js " %}'></script>
+        <script src='{% static "http://maps.google.com/maps/api/js " %}'></script>
+        <script src='{% static "assets/js/leaflet.js " %}'></script>
+        <script src='{% static "assets/js/custom.js " %}'></script>
+        <script src='{% static "assets/js/map-leaflet.js " %}'></script>
+
+</body>
+</html>
+

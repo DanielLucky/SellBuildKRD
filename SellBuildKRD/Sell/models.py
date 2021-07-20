@@ -19,7 +19,7 @@ class Sell(models.Model):
     floor = models.IntegerField()
     totalFloor = models.IntegerField()
     numberOf_rooms = models.IntegerField()
-    totalArea  = models.IntegerField()
+    totalArea = models.IntegerField()
     livingArea = models.IntegerField()
     kitchenArea = models.IntegerField()
     furnish = models.TextField(max_length=20)

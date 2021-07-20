@@ -3,8 +3,6 @@ from .models import Sell
 from django.http import HttpResponse
 
 
-# Create your views here.
-
 
 def index(request):
     latest = Sell.objects.order_by('-pub_date')[:10]
@@ -15,3 +13,5 @@ def sell(request, id_item):
     info = Sell.objects.filter(pk=id_item)
 
     return render(request, "detail.html", {"sell": info})
+
+
