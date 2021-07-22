@@ -1,10 +1,10 @@
+from django.apps import apps
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.apps import apps
+from django.shortcuts import render, redirect
+
+from .forms import CreateUserForm, ImageForm
 
 
 def registerPage(request):
@@ -48,7 +48,13 @@ def logoutUser(request):
 
 @login_required(login_url='/account/login')
 def submitSell(request):
-    return render(request, 'account/submit.html')
+    form = ImageForm()
+    if request.method == 'POST':
+        image = request.POST.get('image')
+
+    context = {'form': form}
+
+    return render(request, 'account/submit.html', context)
 
 
 @login_required(login_url='/account/login')

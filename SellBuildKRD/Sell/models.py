@@ -14,7 +14,6 @@ class Sell(models.Model):
     address = models.TextField(max_length=150)
     telephone = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sell")
-
     # информация о квартире
     floor = models.IntegerField()
     totalFloor = models.IntegerField()
@@ -23,4 +22,11 @@ class Sell(models.Model):
     livingArea = models.IntegerField()
     kitchenArea = models.IntegerField()
     furnish = models.TextField(max_length=20)
+    headerImage = models.ImageField(null= True, blank=True, upload_to="images/")
 
+
+class Image(models.Model):
+    sellId = models.ForeignKey(Sell, on_delete=models.CASCADE, related_name='images')
+    # imagePreview = models.FileField(upload_to='images/')
+    imageSell = models.FileField(upload_to='images/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
