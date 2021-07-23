@@ -16,7 +16,7 @@
     <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
     <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
 
-    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+    <title>Разместить объявление</title>
 
 </head>
 
@@ -56,7 +56,30 @@
 
                         <div class="offset-lg-1 col-lg-10">
 
-                            <form id="form-submit" class="ts-form" enctype="multipart/form-data">
+                            <form id="form-submit" class="ts-form" enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                <!--LOCATION
+                                =====================================================================================-->
+                                <section id="location" class="mb-5">
+
+                                    <!--Title-->
+                                    <h3 class="text-muted border-bottom">Локация</h3>
+
+
+
+                                    <div class="col-sm-6">
+
+                                        <!--Address-->
+                                        <div class="input-group">
+                                            <label for="address">Адрес</label>
+                                            <input type="text" class="form-control border-right-0" id="address">
+                                        </div>
+                                    </div>
+                                    <!--end col-md-6-->
+
+                                    <!--end row-->
+                                </section>
+                                <!--end #location-->
 
                                 <!--BASIC INFORMATION
                                 =====================================================================================-->
@@ -94,8 +117,15 @@
                                                 <!--Area-->
                                                 <div class="col">
                                                     <div class="input-group">
-                                                        <label for="area">Площадь</label>
+                                                        <label for="area">Общая площадь</label>
                                                         <input type="text" class="form-control border-right-0" id="area" name="totalArea">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <label for="area">Площадь кухни</label>
+                                                        <input type="text" class="form-control border-right-0" id="area" name="kitchenArea">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
                                                         </div>
@@ -105,10 +135,18 @@
                                                 <!--Rooms-->
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="rooms">Комнаты</label>
+                                                        <label for="rooms">Кол-во комнат</label>
                                                         <input type="number" class="form-control" id="rooms" name="numberOf_rooms" min="0" required>
                                                     </div>
+                                                    <div class="input-group">
+                                                        <label for="area">Жилая пл.</label>
+                                                        <input type="text" class="form-control border-right-0" id="area" name="livingArea">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
 
                                             </div>
                                             <!--end row-->
@@ -129,6 +167,16 @@
                                                 <option value="Гараж">Гараж</option>
                                             </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="type">Ремонт</label>
+                                                <select class="custom-select" id="type" name="type">
+                                                <option value="">Выберите тип</option>
+                                                <option value="Без ремонта">Без ремонта </option>
+                                                <option value="Капитальный ремонт">Капитальный ремонт</option>
+                                                <option value="Косметический">Косметический</option>
+                                                <option value="От застройщика">От застройщика</option>
+                                            </select>
+                                            </div>
                                         </div>
 
                                         <!--Status Select-->
@@ -141,70 +189,30 @@
                                                 <option value="2">Сдается</option>
                                             </select>
                                             </div>
+                                            <div class="input-group">
+                                                <label for="price">Телефон</label>
+                                                <input type="text" class="form-control border-right-0" id="price" name="telephone">
+                                                <div class="input-group-append">
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
                                     <!--end row-->
                                 </section>
 
-                                <!--LOCATION
-                                =====================================================================================-->
-                                <section id="location" class="mb-5">
-
-                                    <!--Title-->
-                                    <h3 class="text-muted border-bottom">Локация</h3>
-
-
-
-                                    <div class="col-sm-6">
-
-                                        <!--Address-->
-                                        <div class="input-group">
-                                            <label for="address">Адрес</label>
-                                            <input type="text" class="form-control border-right-0" id="address">
-                                        </div>
-                                    </div>
-                                    <!--end col-md-6-->
-
-                                    <!--end row-->
-                                </section>
-                                <!--end #location-->
-
-                                <!--GALLERY
-                                =====================================================================================-->
-                                <section id="gallery" class="mb-5">
-
-                                    <!--Title-->
-                                    <h3 class="text-muted border-bottom">Галерея</h3>
-
-                                    <!--File upload-->
-                                    <div class="file-upload-previews"></div>
-                                    <h4 class="text-muted">Превью</h4>
-                                    <div class="file-upload">
-                                        <input type="file" id="browse" name="headerImage" style="display: none" onChange="Handlechange();" multiple>
-                                        <input type="text" id="filename" readonly="true" />
-                                        <input type="button" value="Обзор" id="fakeBrowse" onclick="HandleBrowseClick();" />
-                                    </div>
-                                    <h4 class="text-muted">Квартира (выберите несколько)</h4>
-                                    <div class="file-upload">
-                                        <input type="file" id="browse" name="imageSell" style="display: none" onChange="Handlechange();" multiple>
-                                        <input type="text" id="filename" readonly="true" />
-                                        <input type="button" value="Обзор" id="fakeBrowse" onclick="HandleBrowseClick();" />
-                                    </div>
-
-                                </section>
 
                                 <!--ADDITIONAL INFORMATION
                                 =====================================================================================-->
                                 <section id="additional-information" class="mb-5">
 
                                     <!--Title-->
-                                    <h3 class="text-muted border-bottom">Additional Information</h3>
+                                    <h3 class="text-muted border-bottom">Дополнительная информация</h3>
 
                                     <!--Description-->
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                                        <label for="description">Описание объекта</label>
+                                        <textarea class="form-control" id="description" rows="4" name="specifications"></textarea>
                                     </div>
 
                                     <!--Row-->
@@ -213,24 +221,16 @@
                                         <!--Bedrooms-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="bedrooms">Bedrooms</label>
-                                                <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="0">
+                                                <label for="bedrooms">Этаж</label>
+                                                <input type="number" class="form-control" id="bedrooms" name="floor" min="0">
                                             </div>
                                         </div>
 
                                         <!--Bathrooms-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="bathrooms">Bathrooms</label>
-                                                <input type="number" class="form-control" id="bathrooms" name="bathrooms" min="0">
-                                            </div>
-                                        </div>
-
-                                        <!--Garages-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="garages">Garages</label>
-                                                <input type="number" class="form-control" id="garages" name="garages" min="0">
+                                                <label for="bathrooms">Кол-во этажей в доме</label>
+                                                <input type="number" class="form-control" id="bathrooms" name="totalFloor" min="1">
                                             </div>
                                         </div>
 
@@ -244,11 +244,36 @@
 
                                 <hr>
 
+
+                                <!--GALLERY
+                                =====================================================================================-->
+                                <section id="gallery" class="mb-5">
+
+                                    <!--Title-->
+                                    <h3 class="text-muted border-bottom">Галерея фотографий</h3>
+
+                                    <!--File upload-->
+                                    <div class="file-upload-previews"></div>
+                                    <h4 class="text-muted">Превью</h4>
+                                    <div class="file-upload">
+
+                                        <input type="file" name="headerImage" accept="image/*" >
+                                        <hr>
+                                        <h4 class="text-muted">Квартира (выберите несколько)</h4>
+                                        <div class="file-upload">
+                                            <input type="file" name="imageSell" multiple="multiple" accept="image/*" >
+                                        </div>
+                                    </div>
+
+
+
+                                </section>
+
+
+
                                 <section class="py-3">
-                                    <a href="#" class="btn btn-outline-secondary btn-lg float-left">
-                                        <i class="fa fa-save mr-2"></i> Save Draft
-                                    </a>
-                                    <button type="submit" onclick="window.location='preview.html'" class="btn btn-primary ts-btn-arrow btn-lg float-right">Preview
+
+                                    <button type="submit" onclick="window.location='preview.html'" class="btn btn-primary ts-btn-arrow btn-lg float-right">Разместить объявление
                                 </button>
                                 </section>
 
@@ -266,7 +291,7 @@
 
 
             <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
-                {% csrf_token %} {{form}} <br/>
+                 <br/>
 
                 <input type="submit" value="Submit">
             </form>
@@ -287,19 +312,6 @@
     <script src='{% static "assets/js/leaflet.js " %}'></script>
     <script src='{% static "assets/js/custom.js " %}'></script>
     <script src='{% static "assets/js/map-leaflet.js " %}'></script>
-
-    <script language="JavaScript" type="text/javascript">
-        function HandleBrowseClick() {
-            var fileinput = document.getElementById("browse");
-            fileinput.click();
-        }
-
-        function Handlechange() {
-            var fileinput = document.getElementById("browse");
-            var textinput = document.getElementById("filename");
-            textinput.value = fileinput.value;
-        }
-    </script>
 
 
 </body>

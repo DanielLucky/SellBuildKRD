@@ -62,7 +62,7 @@ def submitSell(request):
         if form.is_valid():
             # location = Sell.objects.create(user=request.user)
             i = 0
-            sellId = Sell.objects.create(nameSell=12345, specifications=1,
+            sellId = Sell.objects.create(nameSell=request.POST.nameSell, specifications=1,
                                          price=1, address=1, telephone=1,
                                          floor=1, totalFloor=1,
                                          numberOf_rooms=1, totalArea=1,
