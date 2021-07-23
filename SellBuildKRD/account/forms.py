@@ -31,4 +31,9 @@ class ImageForm(forms.ModelForm):
         Image = apps.get_model('Sell', 'Image')
         model = Image
         fields = ('imageSell',)
+        widgets = {
+            'imageSell': forms.FileInput(attrs={'multiple': 'multiple'}),
+        }
+
+
 
