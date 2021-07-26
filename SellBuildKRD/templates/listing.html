@@ -11,13 +11,94 @@
     <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
 
     <title>Продажа в КРД</title>
-
+ <style type="text/css">
+   .card-img {
+  object-fit: cover;
+  width: 150px;
+  height: 100px;
+   }
+   </style>
 
     <body>
+    <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+    <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+    <div class="container">
 
+        <!--Brand Logo-->
+        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
+            <img src="assets/img/logo.png" alt="">
+        </a>
+
+        <!--Responsive Collapse Button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Collapsing Navigation-->
+        <div class="collapse navbar-collapse" id="navbarPrimary">
+
+            <!--LEFT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/">Главная</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/account/detail">Личный кабинет</a>
+                </li>
+
+
+            </ul>
+            <!--end Left navigation main level-->
+
+            <!--RIGHT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav ml-auto">
+                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
+                </li>
+
+                {% else %}
+                <!--LOGIN (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">Войти</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
+                </li>
+                {% endif %}
+                <!--SUBMIT (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary btn-sm m-1 px-3" href="/account/submit">
+                        <i class="fa fa-plus small mr-2"></i> Разместить объявление
+                    </a>
+                </li>
+
+            </ul>
+            <!--end Right navigation-->
+
+        </div>
+        <!--end navbar-collapse-->
+    </div>
+    <!--end container-->
+</nav>
         <!-- WRAPPER
     =================================================================================================================-->
-        <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
             <header id="ts-header" class="fixed-top">
             <!--end #ts-primary-navigation.navbar-->
             </header>
@@ -77,8 +158,9 @@
                                     {% for sell in sells %}
 
                                     <div class=" card ts-item ts-item__list ts-card ">
+                                        <a href="/{{sell.pk}}" class="card-img" data-bg-image="{{ target.headerImage }}">
+                                            <img src="/media/{{ sell.headerImage }}" class="card-img"></a>
 
-                                        <a href="{{sell.pk}}" class="card-img " data-bg-image="assets/img/img-item-thumb-01.jpg" style="background-image: url(&quot;assets/img/img-item-thumb-01.jpg&quot;); "></a>
 
                                         <div class="card-body ">
                                             <figure class="ts-item__info ">
@@ -147,13 +229,14 @@
         </div>
         <!--end page-->
 
-        <script src='{% static "assets/js/jquery-3.3.1.min.js " %}'></script>
-        <script src='{% static "assets/js/popper.min.js " %}'></script>
-        <script src='{% static "assets/bootstrap/js/bootstrap.min.js " %}'></script>
-        <script src='{% static "http://maps.google.com/maps/api/js " %}'></script>
-        <script src='{% static "assets/js/leaflet.js " %}'></script>
-        <script src='{% static "assets/js/custom.js " %}'></script>
-        <script src='{% static "assets/js/map-leaflet.js " %}'></script>
+    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
+    <script src='{% static "assets/js/popper.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.magnific-popup.min.js" %}'></script>
+    <script src='{% static "assets/js/leaflet.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+    <script src='{% static "assets/js/map-leaflet.js" %}'></script>
 
 
 

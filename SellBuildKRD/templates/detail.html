@@ -14,11 +14,96 @@
     <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
 
     <title>Продажа в КРД</title>
+ <style type="text/css">
+   .row {
+    padding-left: 15px;
+   }
+   .ts-image {
+  object-fit: cover;
+  width: 150px;
+  height: 100px;
+   }
+
+   </style>
 
 </head>
 
 <body>
+    <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+    <div class="container">
 
+        <!--Brand Logo-->
+        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
+            <img src="assets/img/logo.png" alt="">
+        </a>
+
+        <!--Responsive Collapse Button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Collapsing Navigation-->
+        <div class="collapse navbar-collapse" id="navbarPrimary">
+
+            <!--LEFT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/">Главная</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/account/detail">Личный кабинет</a>
+                </li>
+
+
+            </ul>
+            <!--end Left navigation main level-->
+
+            <!--RIGHT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav ml-auto">
+                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
+                </li>
+
+                {% else %}
+                <!--LOGIN (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">Войти</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
+                </li>
+                {% endif %}
+                <!--SUBMIT (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary btn-sm m-1 px-3" href="/account/submit">
+                        <i class="fa fa-plus small mr-2"></i> Разместить объявление
+                    </a>
+                </li>
+
+            </ul>
+            <!--end Right navigation-->
+
+        </div>
+        <!--end navbar-collapse-->
+    </div>
+    <!--end container-->
+</nav>
     <!-- WRAPPER
     =================================================================================================================-->
     <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
@@ -28,11 +113,11 @@
         <!--*********************************************************************************************************-->
         <header id="ts-header" class="fixed-top"></header>
 
-            <!-- SECONDARY NAVIGATION
+        <!-- SECONDARY NAVIGATION
         =============================================================================================================-->
-            <nav id="ts-secondary-navigation" class="navbar p-0">
+        <nav id="ts-secondary-navigation" class="navbar p-0">
         </nav>
-    <!--end navbar-nav-->
+        <!--end navbar-nav-->
     </div>
     <!--end container-->
 
@@ -106,7 +191,12 @@
 
                                     <dt>Дата публикации:</dt>
                                     <dd>{{sell.0.pub_date | date:"Y-m-d H:i:s"}}</dd>
-
+                                    <hr>
+                                    <h4>Контакт агента</h4>
+                                    <dt>Агент:</dt>
+                                    <dd>{{sell.0.author}}</dd>
+                                    <dt>Телефон:</dt>
+                                    <dd>{{sell.0.telephone}}</dd>
                                 </dl>
 
                             </div>
@@ -122,27 +212,26 @@
                         =============================================================================================-->
                     <div class="col-md-7 col-lg-8">
 
+
                         <!--GALLERY CAROUSEL
                         =============================================================================================-->
                         <section id="gallery-carousel position-relative">
 
                             <h3>Галерея</h3>
 
-                            <div class="owl-carousel ts-gallery-carousel" data-owl-auto-height="1" data-owl-dots="1" data-owl-loop="1">
-
+                            <div class="owl-carousel ts-gallery-carousel" data-owl-auto-height="0" data-owl-dots="1" data-owl-loop="1">
+                                {% for image in images %}
                                 <!--Slide-->
                                 <div class="slide">
-                                    <div class="ts-image" data-bg-image="assets/img/img-detail-01.jpg">
-                                        <a href="assets/img/img-detail-01.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                                    <div class="ts-image" data-bg-image="/media/{{image.imageSell}}">
+                                        <a href="/media/{{image.imageSell}}" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
                                     </div>
                                 </div>
-
+                                {% endfor %}
 
                             </div>
 
                         </section>
-
-
 
                         <!--DESCRIPTION
                             =========================================================================================-->
@@ -157,46 +246,15 @@
                         </section>
 
 
-                        <!--CONTACT THE AGENT
-                        =============================================================================================-->
-                        <section class="contact-the-agent"></section>
-                        <h3>Контакт агента</h3>
-
-                        <div class="ts-box">
-                            <div class="row">
-
-                                <!--Agent Image & Phone-->
-
-                                <div class="ts-center__vertical mb-4">
-
-                                    <!--Image-->
-                                    <a href="agent-detail-01.html" class="ts-circle p-5 mr-4 ts-shadow__sm" data-bg-image='{% static "assets/img/img-person-05.jpg" %}'></a>
-
-                                    <!--Phone contact-->
-                                    <figure class="mb-0">
-                                        <h5 class="mb-0">{{sell.0.author}}</h5>
-                                        <p class="mb-0">
-                                            <i class="fa fa-phone-square ts-opacity__50 mr-2"></i> {{sell.0.telephone}}
-                                        </p>
-                                    </figure>
-
-                                </div>
 
 
+                    </div>
+                    <!--end col-md-8-->
 
-
-                            </div>
-                            <!--end row-->
-                        </div>
-                        <!--end ts-box-->
-
-        </div>
-        <!--end col-md-8-->
-
-        </div>
-        <!--end row-->
-        </div>
-        <!--end container-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
         </section>
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Sell
+from .models import Sell, Image
 from django.http import HttpResponse
 
 
@@ -11,6 +11,8 @@ def index(request):
 def sell(request, id_item):
     info = Sell.objects.filter(pk=id_item)
 
-    return render(request, "detail.html", {"sell": info})
+    images = Image.objects.filter(sellId=id_item)
+
+    return render(request, "detail.html", {"sell": info, 'images': images})
 
 

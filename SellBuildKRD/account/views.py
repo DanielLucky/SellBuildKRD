@@ -56,22 +56,33 @@ def submitSell(request):
     if request.method == 'GET':
         form = ImageForm()
         formSell = Sell()
-        return render(request, 'account/submit.html', {'form': form, 'formSell': formSell})
+        return render(request, 'account/submit.html')
     elif request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            # location = Sell.objects.create(user=request.user)
-            i = 0
-            sellId = Sell.objects.create(nameSell=request.POST.nameSell, specifications=1,
-                                         price=1, address=1, telephone=1,
-                                         floor=1, totalFloor=1,
-                                         numberOf_rooms=1, totalArea=1,
-                                         livingArea=1, kitchenArea=1,
-                                         furnish=1, author=request.user)
-            for f in request.FILES.getlist('imageSell'):
-                i += 1
-                # print(i)
+            nameSell = request.POST.get('status') + \
+                       ' ' + request.POST.get('numberOf_rooms') + \
+                       'к. кв., ' + request.POST.get('totalArea') + \
+                       'м. ' + request.POST.get('floor') + '/' + \
+                       request.POST.get('totalFloor') + ' эт.'
+            sellId = Sell.objects.create(nameSell= nameSell,
+                                         specifications=request.POST.get('specifications'),
+                                         price=request.POST.get('price'),
+                                         address=request.POST.get('address'),
+                                         telephone=request.POST.get('telephone'),
+                                         floor=request.POST.get('floor'),
+                                         totalFloor=request.POST.get('totalFloor'),
+                                         numberOf_rooms=request.POST.get('numberOf_rooms'),
+                                         totalArea=request.POST.get('totalArea'),
+                                         livingArea=request.POST.get('livingArea'),
+                                         kitchenArea=request.POST.get('kitchenArea'),
+                                         furnish=request.POST.get('furnish'),
+                                         headerImage=request.FILES.get('headerImage'),
+                                         type=request.POST.get('type'),
+                                         status=request.POST.get('status'),
+                                         author=request.user)
 
+            for f in request.FILES.getlist('imageSell'):
                 data = f.read()
                 photo = Image(sellId=sellId)
                 print(sellId.pk)
@@ -79,13 +90,24 @@ def submitSell(request):
                 photo.save()
             return redirect('/account/submit')
         else:
-            return render(request, 'account/submit.html', {'form': form})
+            return render(request, 'account/detail.html', {'form': form})
 
 
 @login_required(login_url='/account/login')
 def agencyDetail(request):
-    sellModel = apps.get_model('Sell', 'Sell')
-    targets = sellModel.objects.filter(author=request.user.pk)
-    return render(request, 'account/agency-detail.html', {'targets': targets})
 
+
+    if request.method == 'GET':
+        sellModel = apps.get_model('Sell', 'Sell')
+        targets = sellModel.objects.filter(author=request.user.pk).order_by('-pk')
+        return render(request, 'account/agency-detail.html', {'targets': targets})
+
+    elif request.method == 'POST':
+        Sell = apps.get_model('Sell', 'Sell')
+        delete = Sell.objects.get(pk=request.POST.get('delete')).delete()
+
+        return redirect('/account/detail')
+
+    # else:
+    #     return render(request, 'account/submit.html', {'form': form})
 

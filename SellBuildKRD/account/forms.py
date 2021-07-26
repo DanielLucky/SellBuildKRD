@@ -8,7 +8,7 @@ class CreateUserForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["username"].widget.attrs["placeholder"] = "Введите имя"
+        self.fields["username"].widget.attrs["placeholder"] = "Введите логин"
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields["email"].widget.attrs["placeholder"] = "Введите Email"
         self.fields['email'].widget.attrs['class'] = 'form-control'

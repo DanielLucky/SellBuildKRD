@@ -21,7 +21,81 @@
 </head>
 
 <body>
+<nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+    <div class="container">
 
+        <!--Brand Logo-->
+        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
+            <img src="assets/img/logo.png" alt="">
+        </a>
+
+        <!--Responsive Collapse Button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Collapsing Navigation-->
+        <div class="collapse navbar-collapse" id="navbarPrimary">
+
+            <!--LEFT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/">Главная</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/account/detail">Личный кабинет</a>
+                </li>
+
+
+            </ul>
+            <!--end Left navigation main level-->
+
+            <!--RIGHT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav ml-auto">
+                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
+                </li>
+
+                {% else %}
+                <!--LOGIN (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">Войти</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
+                </li>
+                {% endif %}
+                <!--SUBMIT (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary btn-sm m-1 px-3" href="/account/submit">
+                        <i class="fa fa-plus small mr-2"></i> Разместить объявление
+                    </a>
+                </li>
+
+            </ul>
+            <!--end Right navigation-->
+
+        </div>
+        <!--end navbar-collapse-->
+    </div>
+    <!--end container-->
+</nav>
     <!-- WRAPPER
     =================================================================================================================-->
     <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
@@ -39,8 +113,6 @@
                         <div class="offset-lg-1 col-lg-10">
                             <div class="ts-title">
                                 <h1>Добавить объявление</h1>
-                                <h3>Здравствуй, {{ request.user }} </h3>
-                                <h4><a href="/account/logout" class="">Выйти</a></h4>
 
                             </div>
                         </div>
@@ -58,28 +130,7 @@
 
                             <form id="form-submit" class="ts-form" enctype="multipart/form-data" method="post">
                                 {% csrf_token %}
-                                <!--LOCATION
-                                =====================================================================================-->
-                                <section id="location" class="mb-5">
 
-                                    <!--Title-->
-                                    <h3 class="text-muted border-bottom">Локация</h3>
-
-
-
-                                    <div class="col-sm-6">
-
-                                        <!--Address-->
-                                        <div class="input-group">
-                                            <label for="address">Адрес</label>
-                                            <input type="text" class="form-control border-right-0" id="address">
-                                        </div>
-                                    </div>
-                                    <!--end col-md-6-->
-
-                                    <!--end row-->
-                                </section>
-                                <!--end #location-->
 
                                 <!--BASIC INFORMATION
                                 =====================================================================================-->
@@ -94,8 +145,8 @@
                                         <!--Title-->
                                         <div class="col-sm-8">
                                             <div class="form-group">
-                                                <label for="title">Название объявления</label>
-                                                <input type="text" class="form-control" id="title" name="nameSell" required>
+                                                <label for="title">Адрес</label>
+                                                <input type="text" class="form-control border-right-0" id="address" name="address" required>
                                             </div>
                                         </div>
 
@@ -103,7 +154,7 @@
                                         <div class="col-sm-4">
                                             <div class="input-group">
                                                 <label for="price">Цена</label>
-                                                <input type="text" class="form-control border-right-0" id="price" name="price">
+                                                <input type="text" class="form-control border-right-0" name="price" required>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0">₽</span>
                                                 </div>
@@ -118,14 +169,14 @@
                                                 <div class="col">
                                                     <div class="input-group">
                                                         <label for="area">Общая площадь</label>
-                                                        <input type="text" class="form-control border-right-0" id="area" name="totalArea">
+                                                        <input type="text" class="form-control border-right-0" name="totalArea" required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
                                                         </div>
                                                     </div>
                                                     <div class="input-group">
                                                         <label for="area">Площадь кухни</label>
-                                                        <input type="text" class="form-control border-right-0" id="area" name="kitchenArea">
+                                                        <input type="text" class="form-control border-right-0"  name="kitchenArea">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
                                                         </div>
@@ -158,10 +209,10 @@
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
                                                 <label for="type">Тип</label>
-                                                <select class="custom-select" id="type" name="type">
+                                                <select class="custom-select" id="type" name="type" required>
                                                 <option value="">Выберите тип</option>
                                                 <option value="Квартира">Квартира</option>
-                                                <option value="Дом, Дача, Коттедж">Дом, Дача, Коттедж</option>
+                                                <option value="Дом">Дом</option>
                                                 <option value="Коммерческая недвижимость">Коммерческая недвижимость</option>
                                                 <option value="Земельный участок">Земельный участок</option>
                                                 <option value="Гараж">Гараж</option>
@@ -169,7 +220,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="type">Ремонт</label>
-                                                <select class="custom-select" id="type" name="type">
+                                                <select class="custom-select" name="furnish">
                                                 <option value="">Выберите тип</option>
                                                 <option value="Без ремонта">Без ремонта </option>
                                                 <option value="Капитальный ремонт">Капитальный ремонт</option>
@@ -183,15 +234,15 @@
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
                                                 <label for="status">Статус</label>
-                                                <select class="custom-select" id="status" name="status">
+                                                <select class="custom-select" id="status" name="status" required>
                                                 <option value="">Выберите статус</option>
-                                                <option value="1">Продается</option>
-                                                <option value="2">Сдается</option>
+                                                <option value="Продается">Продается</option>
+                                                <option value="Сдается">Сдается</option>
                                             </select>
                                             </div>
                                             <div class="input-group">
                                                 <label for="price">Телефон</label>
-                                                <input type="text" class="form-control border-right-0" id="price" name="telephone">
+                                                <input type="text" class="form-control border-right-0" id="price" name="telephone" required>
                                                 <div class="input-group-append">
                                                 </div>
                                             </div>
@@ -222,7 +273,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="bedrooms">Этаж</label>
-                                                <input type="number" class="form-control" id="bedrooms" name="floor" min="0">
+                                                <input type="number" class="form-control" id="bedrooms" name="floor" min="0" required>
                                             </div>
                                         </div>
 
@@ -230,7 +281,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="bathrooms">Кол-во этажей в доме</label>
-                                                <input type="number" class="form-control" id="bathrooms" name="totalFloor" min="1">
+                                                <input type="number" class="form-control" id="bathrooms" name="totalFloor" min="1" required>
                                             </div>
                                         </div>
 
@@ -257,23 +308,18 @@
                                     <h4 class="text-muted">Превью</h4>
                                     <div class="file-upload">
 
-                                        <input type="file" name="headerImage" accept="image/*" >
+                                        <input type="file" name="headerImage" accept="image/*">
                                         <hr>
                                         <h4 class="text-muted">Квартира (выберите несколько)</h4>
                                         <div class="file-upload">
-                                            <input type="file" name="imageSell" multiple="multiple" accept="image/*" >
+                                            <input type="file" name="imageSell" multiple="multiple" accept="image/*">
                                         </div>
                                     </div>
 
-
-
                                 </section>
-
-
-
                                 <section class="py-3">
 
-                                    <button type="submit" onclick="window.location='preview.html'" class="btn btn-primary ts-btn-arrow btn-lg float-right">Разместить объявление
+                                    <button type="submit" onclick="/" class="btn btn-primary ts-btn-arrow btn-lg float-right" >Разместить объявление
                                 </button>
                                 </section>
 
@@ -290,11 +336,6 @@
 
 
 
-            <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
-                 <br/>
-
-                <input type="submit" value="Submit">
-            </form>
         </main>
         <!--end #ts-main-->
 
@@ -305,13 +346,14 @@
 
     </div>
     <!--end page-->
-    <script src='{% static "assets/js/jquery-3.3.1.min.js " %}'></script>
-    <script src='{% static "assets/js/popper.min.js " %}'></script>
-    <script src='{% static "assets/bootstrap/js/bootstrap.min.js " %}'></script>
-    <script src='{% static "http://maps.google.com/maps/api/js " %}'></script>
-    <script src='{% static "assets/js/leaflet.js " %}'></script>
-    <script src='{% static "assets/js/custom.js " %}'></script>
-    <script src='{% static "assets/js/map-leaflet.js " %}'></script>
+    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
+    <script src='{% static "assets/js/popper.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.magnific-popup.min.js" %}'></script>
+    <script src='{% static "assets/js/leaflet.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+    <script src='{% static "assets/js/map-leaflet.js" %}'></script>
 
 
 </body>
