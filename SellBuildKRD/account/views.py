@@ -107,7 +107,3 @@ def agencyDetail(request):
         delete = Sell.objects.get(pk=request.POST.get('delete')).delete()
 
         return redirect('/account/detail')
-
-    # else:
-    #     return render(request, 'account/submit.html', {'form': form})
-
