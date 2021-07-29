@@ -18,13 +18,13 @@
    .row {
     padding-left: 15px;
    }
-   .ts-image {
-  object-fit: cover;
-  width: 150px;
-  height: 100px;
-   }
+   [data-bg-image] {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
 
-   </style>
+</style>
 
 </head>
 
@@ -171,23 +171,37 @@
                                     <dt>ID:</dt>
                                     <dd>#{{sell.0.pk}}</dd>
 
+				    {% if sell.0.district is not Null %}
+				    <dt>Район:</dt>
+                                    <dd>{{sell.0.district}}</dd>
+				    {% endif %}
+
+                                    <dt>Адрес:</dt>
+                                    <dd>{{sell.0.address}}</dd>
+
+                                    <dt>Общая пл.:</dt>
+                                    <dd>{{ sell.0.totalArea}} м<sup>2</sup></dd>
+                                    
+				    {% if sell.0.livingArea is not Null %}
+                                    <dt>Жилая пл.:</dt>
+                                    <dd>{{sell.0.livingArea}} м<sup>2</sup></dd>
+                                    {% endif %}
+                                    
+			 	    {% if sell.0.kitchenArea is not Null %}
+                                    <dt>Пл. Кухни: </dt>
+                                    <dd>{{sell.0.kitchenArea}} м<sup>2</sup></dd>
+                                    {% endif %}
+
                                     <dt>Этаж/Из:</dt>
                                     <dd>{{sell.0.floor}} / {{sell.0.totalFloor}}</dd>
 
                                     <dt>Кол-во комнат:</dt>
                                     <dd>{{sell.0.numberOf_rooms}}</dd>
-
-                                    <dt>Общая пл.:</dt>
-                                    <dd>{{ sell.0.totalArea}} м<sup>2</sup></dd>
-
-                                    <dt>Жилая пл.:</dt>
-                                    <dd>{{sell.0.livingArea}} м<sup>2</sup></dd>
-
-                                    <dt>Пл. Кухни: </dt>
-                                    <dd>{{sell.0.kitchenArea}} м<sup>2</sup></dd>
-
+                                    
+				    {% if sell.0.furnish is not Null %}
                                     <dt>Ремонт:</dt>
                                     <dd>{{sell.0.furnish}}</dd>
+                                    {% endif %}
 
                                     <dt>Дата публикации:</dt>
                                     <dd>{{sell.0.pub_date | date:"Y-m-d H:i:s"}}</dd>

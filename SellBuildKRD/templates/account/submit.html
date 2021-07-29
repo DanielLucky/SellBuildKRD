@@ -143,17 +143,50 @@
                                     <div class="row">
 
                                         <!--Title-->
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
-                                                <label for="title">Адрес</label>
+                                                <label for="title">Адрес*</label>
                                                 <input type="text" class="form-control border-right-0" id="address" name="address" required>
                                             </div>
                                         </div>
 
+					<div class="col-sm-4">
+                                            <div class="input-group">
+ 						<label for="type">Район</label>
+                                                <select class="custom-select" id="type" name="district" >
+                                                <option value="">Выберите район</option>
+                                                <option value="Центральный">Центральный</option>
+                                                <option value="Фестивальный">Фестивальный</option>
+                                                <option value="Юбилейный">Юбилейный</option>
+                                                <option value="Пашковский">Пашковский</option>
+                                                <option value="Славянский">Славянский</option>
+<option value="Черемушки">Черемушки</option>
+<option value="Комсомольский">Комсомольский</option>
+<option value="Гидрострой">Гидрострой</option>
+<option value="Репино">Репино</option>
+<option value="Восточно-Кругликовский">Восточно-Кругликовский</option>
+<option value="40 лет Победы">40 лет Победы</option>
+<option value="Авиагородок">Авиагородок</option>
+<option value="Аэропорт">Аэропорт</option>
+<option value="Музыкальный">Музыкальный</option>
+<option value="Вавилова">Вавилова</option>
+<option value="Учхоз Кубань">Учхоз Кубань</option>
+<option value="Рубероидный">Рубероидный</option>
+<option value="Сельхозинститут">Сельхозинститут</option>
+<option value="ТЭЦ">ТЭЦ</option>
+<option value="Западный обход">Западный обход</option>
+<option value="Московский">Московский</option>
+<option value="ЗИП">ЗИП</option>
+
+                                            </select>
+
+                                            
+                                            </div>
+                                        </div>
                                         <!--Price-->
                                         <div class="col-sm-4">
                                             <div class="input-group">
-                                                <label for="price">Цена</label>
+                                                <label for="price">Цена*</label>
                                                 <input type="text" class="form-control border-right-0" name="price" required>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0">₽</span>
@@ -168,14 +201,14 @@
                                                 <!--Area-->
                                                 <div class="col">
                                                     <div class="input-group">
-                                                        <label for="area">Общая площадь</label>
+                                                        <label for="area">Общая пл.*</label>
                                                         <input type="text" class="form-control border-right-0" name="totalArea" required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
                                                         </div>
                                                     </div>
                                                     <div class="input-group">
-                                                        <label for="area">Площадь кухни</label>
+                                                        <label for="area">Пл. кухни</label>
                                                         <input type="text" class="form-control border-right-0"  name="kitchenArea">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text bg-white border-left-0">м<sup>2</sup></span>
@@ -186,7 +219,7 @@
                                                 <!--Rooms-->
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="rooms">Кол-во комнат</label>
+                                                        <label for="rooms">Кол-во комнат*</label>
                                                         <input type="number" class="form-control" id="rooms" name="numberOf_rooms" min="0" required>
                                                     </div>
                                                     <div class="input-group">
@@ -208,7 +241,7 @@
                                         <!--Type Select-->
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
-                                                <label for="type">Тип</label>
+                                                <label for="type">Тип*</label>
                                                 <select class="custom-select" id="type" name="type" required>
                                                 <option value="">Выберите тип</option>
                                                 <option value="Квартира">Квартира</option>
@@ -233,7 +266,7 @@
                                         <!--Status Select-->
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
-                                                <label for="status">Статус</label>
+                                                <label for="status">Статус*</label>
                                                 <select class="custom-select" id="status" name="status" required>
                                                 <option value="">Выберите статус</option>
                                                 <option value="Продается">Продается</option>
@@ -241,7 +274,7 @@
                                             </select>
                                             </div>
                                             <div class="input-group">
-                                                <label for="price">Телефон</label>
+                                                <label for="price">Телефон*</label>
                                                 <input type="text" class="form-control border-right-0" id="price" name="telephone" required>
                                                 <div class="input-group-append">
                                                 </div>
@@ -272,16 +305,16 @@
                                         <!--Bedrooms-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="bedrooms">Этаж</label>
-                                                <input type="number" class="form-control" id="bedrooms" name="floor" min="0" required>
+                                                <label for="bedrooms">Этаж*</label>
+                                                <input type="text" class="form-control" id="bedrooms" name="floor" min="0" required >
                                             </div>
                                         </div>
 
                                         <!--Bathrooms-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="bathrooms">Кол-во этажей в доме</label>
-                                                <input type="number" class="form-control" id="bathrooms" name="totalFloor" min="1" required>
+                                                <label for="bathrooms">Кол-во этажей в доме*</label>
+                                                <input type="text" class="form-control" id="bathrooms" name="totalFloor" min="1" required>
                                             </div>
                                         </div>
 

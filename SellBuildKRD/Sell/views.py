@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Sell, Image
 from django.core.paginator import Paginator
+from django.http import Http404
 
 
 # def listing(request):
@@ -13,15 +14,17 @@ from django.core.paginator import Paginator
 #
 
 def index(request):
-
-    if request.method == 'GET':
-        print(request.GET.get('page'))
-        sells = Sell.objects.order_by('-pub_date')
-        p = Paginator(sells, 10)
-        if request.GET.get('page') is not None:
-            page = int(request.GET.get('page'))
-            return render(request, "listing.html", {"sells": p.page(page)})
-        return render(request, "listing.html", {"sells": p.page(1)})
+    try:
+        if request.method == 'GET':
+            print(request.GET.get('page'))
+            sells = Sell.objects.order_by('-pub_date')
+            p = Paginator(sells, 10)
+            if request.GET.get('page') is not None:
+                page = int(request.GET.get('page'))
+                return render(request, "listing.html", {"sells": p.page(page)})
+            return render(request, "listing.html", {"sells": p.page(1)})
+    except MyModel.DoesNotExist:
+        raise Http404("No MyModel matches the given query.")
 
 
 

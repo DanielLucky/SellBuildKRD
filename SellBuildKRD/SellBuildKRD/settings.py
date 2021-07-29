@@ -26,7 +26,7 @@ SECRET_KEY = '1i+g)rie42p_b$ui+2(eab-ngz=m*wtq5v9oz3)734p0_nnld4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.87.100', 'lucky-spb.online']
 
 
 # Application definition
@@ -80,10 +80,14 @@ WSGI_APPLICATION = 'SellBuildKRD.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SellBuildKRD',
+        'USER': 'django',
+        'PASSWORD': 'Zaq12wsx~',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
-}
+  }
 
 
 # Password validation
@@ -127,8 +131,11 @@ LOGOUT_URL = reverse_lazy('logout')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+ADMIN_WHITELIST = [ '127.0.0.1', '192.168.87.0/24', '192.168.50.0/24', ]
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = '/home/serverdl/apps/SellBuildKRD/SellBuildKRD/static/'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'

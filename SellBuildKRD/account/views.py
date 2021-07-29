@@ -80,7 +80,9 @@ def submitSell(request):
                                          headerImage=request.FILES.get('headerImage'),
                                          type=request.POST.get('type'),
                                          status=request.POST.get('status'),
-                                         author=request.user)
+                                         author=request.user,
+					 district=request.POST.get('district'),
+					 )
 
             for f in request.FILES.getlist('imageSell'):
                 data = f.read()

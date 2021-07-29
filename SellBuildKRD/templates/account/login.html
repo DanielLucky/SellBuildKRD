@@ -41,7 +41,7 @@
             <section id="page-title">
                 <div class="container">
                     <div class="ts-title">
-                        <h1>Login</h1>
+                        <h1>Вход</h1>
                     </div>
                 </div>
             </section>
@@ -61,14 +61,14 @@
                                 <!--Login tab-->
                                 <li class="nav-item">
                                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">
-                                        <h3>Login</h3>
+                                        <h3>Вход</h3>
                                     </a>
                                 </li>
 
                                 <!--Register tab-->
                                 <li class="nav-item">
                                     <a class="nav-link" id="register-tab"  href="/account/register" >
-                                        <h3>Register</h3>
+                                        <h3>Регистрация</h3>
                                     </a>
                                 </li>
 
@@ -87,12 +87,12 @@
                                         {% csrf_token %}
                                         <!--Email-->
                                         <div class="form-group">
-                                            <input type="login" class="form-control" id="login-email" placeholder="Логин" required name="username">
+                                            <input type="login" class="form-control" id="login-email" placeholder="Введите логин" required name="username">
                                         </div>
 
                                         <!--Password-->
                                         <div class="input-group ts-has-password-toggle">
-                                            <input type="password" class="form-control border-right-0" placeholder="Пароль"  required name="password">
+                                            <input type="password" class="form-control border-right-0" placeholder="Введите пароль"  required name="password">
                                             <div class="input-group-append">
                                                 <a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
                                                     <i class="fa fa-eye"></i>
@@ -105,7 +105,7 @@
 
 
                                             <!--Submit button-->
-                                            <button type="submit" class="btn btn-primary">Login</button>
+                                            <button type="submit" class="btn btn-primary">Вход</button>
 
                                         </div>
                                         {% for message in messages %}

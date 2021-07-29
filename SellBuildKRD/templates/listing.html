@@ -154,7 +154,7 @@
 
                                     <div class=" card ts-item ts-item__list ts-card ">
                                         <a href="/{{sell.pk}}" class="card-img" data-bg-image="{{ target.headerImage }}">
-                                            <img src="/media/{{ sell.headerImage }}" class="card-img"></a>
+                                            <img src="/media/{% if sell.headerImage == ''%}images/KVARTIRA.png{% else %}{{sell.headerImage}}{% endif %}" class="card-img"></a>
 
 
                                         <div class="card-body ">
@@ -169,27 +169,20 @@
                                             </div>
 
                                             <div class="ts-description-lists ">
-                                                <dl>
-                                                    <dt>Площадь</dt>
-                                                    <dd>{{sell.totalArea}}м<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
+                                                {% if sell.livingArea != '' %}
+						<dl>
                                                     <dt>Жилая пл.</dt>
                                                     <dd>{{sell.livingArea}}м<sup>2</sup></dd>
                                                 </dl>
+						{% endif %}
+
+						{% if sell.kitchenArea != '' %}
                                                 <dl>
                                                     <dt>Пл. Кухни</dt>
                                                     <dd>{{sell.kitchenArea}}м<sup>2</sup></dd>
                                                 </dl>
-                                                <dl>
-                                                    <dt>Кол-во комнат</dt>
-                                                    <dd>{{sell.numberOf_rooms}}</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Этаж/Из</dt>
-                                                    <dd>{{sell.floor}} / {{sell.totalFloor}}</dd>
-                                                </dl>
-                                                <dl>
+						{% endif %}
+                                              	<dl>
                                                     <dt>Отделка</dt>
                                                     <dd>{{sell.furnish}}</dd>
                                                 </dl>
