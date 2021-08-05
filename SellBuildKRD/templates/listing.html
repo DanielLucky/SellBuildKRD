@@ -97,11 +97,9 @@
             <header id="ts-header" class="fixed-top">
             <!--end #ts-primary-navigation.navbar-->
             </header>
-            <!--*********************************************************************************************************-->
-            <!--HEADER **************************************************************************************************-->
-            <!--*********************************************************************************************************-->
 
-            <!--end Header-->
+
+
 
             <!--*********************************************************************************************************-->
             <!-- MAIN ***************************************************************************************************-->
@@ -126,28 +124,244 @@
                     </div>
                 </section>
 
-                <!--ITEMS AND SIDEBAR
-            =========================================================================================================-->
+
+<!--SEARCH FORM=========================================================================================================-->
+        <section id="search-form" class="ts-form__map-horizontal1">
+            <div class="container">
+
+                <form id="form-search" class="ts-form" method="post">
+                    {% csrf_token %}
+
+                    <section class="ts-box p-0">
+<!--PRIMARY SEARCH INPUTS=========================================================================================-->
+                        <div class="form-row px-4 py-3">
+                            <!--Keyword-->
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group my-2">
+                                                <select class="custom-select" name="district">
+                                                <option value="">Выберите район</option>
+                                                <option value="Центральный">Центральный</option>
+                                                <option value="Фестивальный">Фестивальный</option>
+                                                <option value="Юбилейный">Юбилейный</option>
+                                                <option value="Пашковский">Пашковский</option>
+                                                <option value="Славянский">Славянский</option>
+                                                <option value="Черемушки">Черемушки</option>
+                                                <option value="Комсомольский">Комсомольский</option>
+                                                <option value="Гидрострой">Гидрострой</option>
+                                                <option value="Репино">Репино</option>
+                                                <option value="Восточно-Кругликовский">Восточно-Кругликовский</option>
+                                                <option value="40 лет Победы">40 лет Победы</option>
+                                                <option value="Авиагородок">Авиагородок</option>
+                                                <option value="Аэропорт">Аэропорт</option>
+                                                <option value="Музыкальный">Музыкальный</option>
+                                                <option value="Вавилова">Вавилова</option>
+                                                <option value="Учхоз Кубань">Учхоз Кубань</option>
+                                                <option value="Рубероидный">Рубероидный</option>
+                                                <option value="Сельхозинститут">Сельхозинститут</option>
+                                                <option value="ТЭЦ">ТЭЦ</option>
+                                                <option value="Западный обход">Западный обход</option>
+                                                <option value="Московский">Московский</option>
+                                                <option value="ЗИП">ЗИП</option>
+                                                </select>
+                                </div>
+                            </div>
+
+                            <!--Other inputs-->
+                            <div class="col-md-8">
+                                <div class="form-row">
+
+                                    <!--Type-->
+                                    <div class="col-sm-3">
+                                            <select class="custom-select my-2" name="type">
+                                                <option value="">Выберите тип</option>
+                                                <option value="Квартира">Квартира</option>
+                                                <option value="Дом">Дом</option>
+                                                <option value="Коммерческая недвижимость">Коммерческая недвижимость</option>
+                                                <option value="Земельный участок">Земельный участок</option>
+                                                <option value="Гараж">Гараж</option>
+                                            </select>
+                                    </div>
+
+                                    <!--Status-->
+                                    <div class="col-sm-3">
+                                            <select class="custom-select my-2" name="status">
+                                                <option value="">Выберите статус</option>
+                                                <option value="Продается">Продается</option>
+                                                <option value="Сдается">Сдается</option>
+                                            </select>
+                                    </div>
+
+                                    <!--Max Price-->
+                                    <div class="col-sm-3">
+                                        <div class="input-group my-2">
+                                            <input type="text" class="form-control border-right-0" id="price" placeholder="Цена до" name="price">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text bg-white border-left-0">₽</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Submit button-->
+                                    <div class="col-sm-3">
+                                        <div class="form-group my-2">
+                                            <button type="submit" class="btn btn-primary w-100" id="search-btn">Поиск
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end col-md-8-->
+
+                        </div>
+                        <!--end form-row-->
+
+                        <!--MORE OPTIONS - ADVANCED SEARCH
+                            =========================================================================================-->
+                        <div class="ts-bg-light px-4 py-2 border-top">
+
+                            <!--More Options Button-->
+                            <a href="#more-options-collapse" class="collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-options-collapse">
+                                <i class="fa fa-plus-circle ts-text-color-primary mr-2 ts-visible-on-collapsed"></i>
+                                <i class="fa fa-minus-circle ts-text-color-primary mr-2 ts-visible-on-uncollapsed"></i>
+                                More Options
+                            </a>
+
+                            <!--Hidden Form-->
+                            <div class="collapse" id="more-options-collapse">
+
+                                <!--Padding-->
+                                <div class="py-4">
+
+                                    <!--Row-->
+                                    <div class="form-row">
+
+                                        <!--Bedrooms-->
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="bedrooms">Bedrooms</label>
+                                                <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="0">
+                                            </div>
+                                        </div>
+
+                                        <!--Bathrooms-->
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="bathrooms">Bathrooms</label>
+                                                <input type="number" class="form-control" id="bathrooms" name="bathrooms" min="0">
+                                            </div>
+                                        </div>
+
+                                        <!--Garages-->
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="garages">Garages</label>
+                                                <input type="number" class="form-control" id="garages" name="garages" min="0">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--end row-->
+
+                                    <!--Checkboxes-->
+                                    <div id="features-checkboxes" class="w-100">
+                                        <h6 class="mb-3">Features</h6>
+
+                                        <div class="ts-column-count-3">
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
+                                                <label class="custom-control-label" for="ch_1">Air conditioning</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
+                                                <label class="custom-control-label" for="ch_2">Bedding</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_3" name="features[]" value="ch_3">
+                                                <label class="custom-control-label" for="ch_3">Heating</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_4" name="features[]" value="ch_4">
+                                                <label class="custom-control-label" for="ch_4">Internet</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_5" name="features[]" value="ch_5">
+                                                <label class="custom-control-label" for="ch_5">Microwave</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_6" name="features[]" value="ch_6">
+                                                <label class="custom-control-label" for="ch_6">Smoking allowed</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_7" name="features[]" value="ch_7">
+                                                <label class="custom-control-label" for="ch_7">Terrace</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_8" name="features[]" value="ch_8">
+                                                <label class="custom-control-label" for="ch_8">Balcony</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_9" name="features[]" value="ch_9">
+                                                <label class="custom-control-label" for="ch_9">Iron</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_10" name="features[]" value="ch_10">
+                                                <label class="custom-control-label" for="ch_10">Hi-Fi</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_11" name="features[]" value="ch_11">
+                                                <label class="custom-control-label" for="ch_11">Beach</label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
+                                                <label class="custom-control-label" for="ch_12">Parking</label>
+                                            </div>
+
+                                        </div>
+                                        <!--end ts-column-count-3-->
+
+                                    </div>
+                                    <!--end #features-checkboxes-->
+
+                                </div>
+                                <!--end Padding-->
+                            </div>
+                            <!--end more-options-collapse-->
+
+                        </div>
+                        <!--end ts-bg-light-->
+                    </section>
+
+                </form>
+                <!--end #form-search-->
+
+            </div>
+            <!--end container-->
+        </section>
+        <!--end #search-form-->
+
+
                 <section id="items-grid-and-sidebar">
                     <div class="container">
                         <div class="row">
 
-                            <!--LEFT SIDE (SIDEBAR)
-                        =============================================================================================-->
 
-                            <!--end Right Side / col-md-4-->
-
-                            <!--RIGHT SIDE (ITEMS)
-                        =============================================================================================-->
                             <div class="col-md-8">
 
-                                <!--DISPLAY CONTROL
-                            =========================================================================================-->
-
-
-                                <!--ITEMS LIST
-                            =========================================================================================-->
-                                <section id="ts-items-list" style="width: 1000px;">
+                                <section id="ts-items-list" style="width: 100%;">
 
 
                                     {% for sell in sells %}

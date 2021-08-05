@@ -62,10 +62,10 @@ def submitSell(request):
         if form.is_valid():
             nameSell = request.POST.get('status') + \
                        ' ' + request.POST.get('numberOf_rooms') + \
-                       'к. кв., ' + request.POST.get('totalArea') + \
-                       'м. ' + request.POST.get('floor') + '/' + \
+                       'к. ' + request.POST.get('type') + ' ' + request.POST.get('totalArea') + \
+                       'м. ' + request.POST.get('floor').lower() + '/' + \
                        request.POST.get('totalFloor') + ' эт.'
-            sellId = Sell.objects.create(nameSell= nameSell,
+            sellId = Sell.objects.create(nameSell=nameSell,
                                          specifications=request.POST.get('specifications'),
                                          price=request.POST.get('price'),
                                          address=request.POST.get('address'),
@@ -81,8 +81,8 @@ def submitSell(request):
                                          type=request.POST.get('type'),
                                          status=request.POST.get('status'),
                                          author=request.user,
-					 district=request.POST.get('district'),
-					 )
+                                         district=request.POST.get('district'),
+                                         )
 
             for f in request.FILES.getlist('imageSell'):
                 data = f.read()
@@ -97,8 +97,6 @@ def submitSell(request):
 
 @login_required(login_url='/account/login')
 def agencyDetail(request):
-
-
     if request.method == 'GET':
         sellModel = apps.get_model('Sell', 'Sell')
         targets = sellModel.objects.filter(author=request.user.pk).order_by('-pk')

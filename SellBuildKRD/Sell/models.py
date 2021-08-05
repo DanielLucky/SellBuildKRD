@@ -19,16 +19,17 @@ class Sell(models.Model):
     totalFloor = models.TextField()
     numberOf_rooms = models.TextField()
     totalArea = models.TextField()
-    livingArea = models.TextField(null=True,)
-    kitchenArea = models.TextField(null=True,)
+    livingArea = models.TextField(null=True, )
+    kitchenArea = models.TextField(null=True, )
     furnish = models.TextField(null=True, max_length=20)
     type = models.TextField()
     status = models.TextField()
     headerImage = models.ImageField(null=True, blank=True, upload_to="images/")
     district = models.TextField(null=True)
 
+
 class Image(models.Model):
     sellId = models.ForeignKey(Sell, on_delete=models.CASCADE, related_name='images')
     # imagePreview = models.FileField(upload_to='images/')
-    imageSell = models.ImageField(null= True, blank=True, upload_to="images/",)
+    imageSell = models.ImageField(null=True, blank=True, upload_to="images/", )
     uploaded_at = models.DateTimeField(auto_now_add=True)

@@ -2,3 +2,7 @@
 SellBuildKRD/db.sqlite3
 
 .idea/
+!/SellBuildKRD/SellBuildKRD/settings.py
+!/SellBuildKRD/account/migrations/
+!/SellBuildKRD/Sell/migrations/
+!/SellBuildKRD/image/
