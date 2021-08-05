@@ -5,7 +5,6 @@ from django.core.paginator import Paginator
 
 def index(request):
     if request.method == 'GET':
-        print(request.GET.get('page'))
         sells = Sell.objects.order_by('-pub_date')
         p = Paginator(sells, 10)
         if request.GET.get('page') is not None:
@@ -17,11 +16,12 @@ def index(request):
                 and request.POST.get('price') == ''\
                 and request.POST.get('type') == ''\
                 and request.POST.get('status') == '':
-            sellSearch = Sell.objects.all()
-            print(sellSearch)
+            sellSearch = Sell.objects.order_by('-pub_date')
+
             return render(request, "listing.html", {"sells": sellSearch})
         else:
-            sellSearch = Sell.objects.filter(district=request.POST.get('district'), price__lte=request.POST.get('price'), type=request.POST.get('type'), status=request.POST.get('status'))
+            sellSearch = Sell.objects.order_by('-pub_date').filter(district=request.POST.get('district'), price__lte=request.POST.get('price'), type=request.POST.get('type'), status=request.POST.get('status'))
+
             return render(request, "listing.html", {"sells": sellSearch})
 
 
