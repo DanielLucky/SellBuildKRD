@@ -6,3 +6,4 @@ SellBuildKRD/db.sqlite3
 !/SellBuildKRD/account/migrations/
 !/SellBuildKRD/Sell/migrations/
 !/SellBuildKRD/image/
+!/SellBuildKRD/maapp_models.png
