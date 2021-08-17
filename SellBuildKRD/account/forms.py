@@ -2,10 +2,10 @@ from django import forms
 from django.apps import apps
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import ContactSend
 
 
 class CreateUserForm(UserCreationForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["username"].widget.attrs["placeholder"] = "Введите логин"
@@ -17,12 +17,8 @@ class CreateUserForm(UserCreationForm):
         self.fields["password2"].widget.attrs["placeholder"] = "Повторите пароль"
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
-    class Meta:
+    class Meta(UserCreationForm):
         model = User
-        # username = forms.CharField()
-        # password1 = forms.CharField(widget=forms.PasswordInput)
-        # password2 = forms.CharField(widget=forms.PasswordInput)
-        # email = forms.EmailField()
         fields = ['username', 'password1', 'password2', 'email']
 
 
@@ -36,4 +32,7 @@ class ImageForm(forms.ModelForm):
         }
 
 
-
+class ContactSendForm(forms.ModelForm):
+    class Meta:
+        model = ContactSend
+        fields = ('theme', 'message')

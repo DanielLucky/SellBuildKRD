@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+       <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="ThemeStarz">
+
+        <title>{% block title %}Аренда/Продажа{% endblock %} | Недвижимость КРД</title>
+        <!-- Загрузка статики -->
+        {% load static %}
+        <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+        <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
+        <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
+        <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
+    </head>
+    <body>
+    <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+        {% include 'nav.html' %}
+        <main>
+            <div class="container">
+                {% block content %}
+                <!-- Содержимое страницы -->
+                {% endblock content %}
+            </div>
+        </main>
+
+    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
+    <script src='{% static "assets/js/popper.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.magnific-popup.min.js" %}'></script>
+    <script src='{% static "assets/js/leaflet.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+    <script src='{% static "assets/js/map-leaflet.js" %}'></script>
+        {% include 'footer.html' %}
+
+
+    </body>
+</html>

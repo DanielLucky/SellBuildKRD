@@ -4,8 +4,30 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
+from .forms import CreateUserForm, ImageForm, ContactSendForm
+from .models import ContactSend
 
-from .forms import CreateUserForm, ImageForm
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+
+
+class SignUp(CreateView):
+    form_class = CreateUserForm
+    success_url = reverse_lazy("login") #  где login — это параметр "name" в path()
+    template_name = "signup.html"
+
+
+def ContactSendView(request):
+    if request.method == 'GET':
+        return render(request, 'contactSend.html')
+    elif request.method == 'POST':
+        form = ContactSendForm(request.POST)
+        if form.is_valid():
+            ContactSend.objects.create(name_agent=request.user,
+                                           theme=request.POST.get('theme'),
+                                           message=request.POST.get('message'),)
+
+            return render(request, 'thx.html')
 
 
 def registerPage(request):
@@ -107,3 +129,4 @@ def agencyDetail(request):
         delete = Sell.objects.get(pk=request.POST.get('delete')).delete()
 
         return redirect('/account/detail')
+

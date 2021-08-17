@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Обращение{% endblock %}
+{% block content %}
+        <section id="contact-form">
+            <div class="container">
+                <div class="row">
+
+                    <!--FORM (RIGHT SIDE)
+                        =============================================================================================-->
+                    <div class="col-md-8">
+
+                        <!--Title-->
+                        <h2>Обращение</h2>
+                        <h4>Прошу, опишите проблему с которой вы столкнулись, письмо с ответом будет отправлено на Email указанный при регистрации.</h4>
+
+                        <!--Form-->
+                        <form id="form-contact" method="post" class="clearfix ts-form ts-form-email" data-php-path="assets/php/email.php">
+
+                            {% csrf_token %}
+                            <!--Subject-->
+                            <div class="form-group">
+                                <label>Тема*</label>
+                                <input type="text" class="form-control" id="form-contact-subject" name="theme" placeholder="Введите тему обращения" required>
+                            </div>
+
+                            <!--Message-->
+                            <div class="form-group">
+                                <label>Сообщение*</label>
+                                <textarea class="form-control" id="form-contact-message" rows="5" name="message" placeholder="Введите текст сообщения" required></textarea>
+                            </div>
+
+                            <!--Submit button-->
+                            <div class="form-group clearfix">
+                                <button type="submit" class="btn btn-primary float-right" id="form-contact-submit">Отправить
+                                </button>
+                            </div>
+
+                            <div class="form-contact-status"></div>
+
+                        </form>
+                        <!--end form-contact -->
+                         <p>{{ context }}</p>
+                    </div>
+                    <!--end col-md-8-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+{% endblock %}

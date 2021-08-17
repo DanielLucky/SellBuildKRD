@@ -63,10 +63,11 @@
 
             <!--RIGHT NAVIGATION MAIN LEVEL
             =================================================================================================-->
+
             <ul class="navbar-nav ml-auto">
                  {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
+                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!</a>
                 </li>
 
                 <!--REGISTER (Main level)

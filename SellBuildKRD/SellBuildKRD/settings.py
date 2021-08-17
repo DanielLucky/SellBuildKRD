@@ -16,7 +16,6 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -26,8 +25,7 @@ SECRET_KEY = '1i+g)rie42p_b$ui+2(eab-ngz=m*wtq5v9oz3)734p0_nnld4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.87.100', 'lucky-spb.online']
-
+ALLOWED_HOSTS = ['192.168.87.100', 'lucky-spb.online', '127.0.0.1']
 
 # Application definition
 
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'account.context.year'
             ],
         },
     },
@@ -74,21 +74,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SellBuildKRD.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SellBuildKRD',
-        'USER': 'django',
-        'PASSWORD': 'Zaq12wsx~',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-  }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -108,11 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -131,12 +124,19 @@ LOGOUT_URL = reverse_lazy('logout')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-ADMIN_WHITELIST = [ '127.0.0.1', '192.168.87.0/24', '192.168.50.0/24', ]
+ADMIN_WHITELIST = ['127.0.0.1', '192.168.87.0/24', '192.168.50.0/24', ]
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_ROOT = '/home/serverdl/apps/SellBuildKRD/SellBuildKRD/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = ''
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/account/detail/"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
