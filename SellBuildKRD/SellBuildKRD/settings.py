@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +78,14 @@ WSGI_APPLICATION = 'SellBuildKRD.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SellBuildKRD',
+        'USER': 'django',
+        'PASSWORD': 'Zaq12wsx~',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
-}
+  }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -129,8 +132,8 @@ ADMIN_WHITELIST = ['127.0.0.1', '192.168.87.0/24', '192.168.50.0/24', ]
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATIC_ROOT = ''
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = '/home/serverdl/apps/SellBuildKRD/SellBuildKRD/static/'
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
