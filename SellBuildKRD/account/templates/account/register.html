@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    {% load static %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
+
+    <title>Авторизация</title>
+
+</head>
+
+<body>
+
+    <!-- WRAPPER
+    =================================================================================================================-->
+    <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+        <!--*********************************************************************************************************-->
+        <!--HEADER **************************************************************************************************-->
+        <!--*********************************************************************************************************-->
+        <header id="ts-header" class="fixed-top">
+            <!--end #ts-primary-navigation.navbar-->
+
+        </header>
+        <!--end Header-->
+
+        <!--*********************************************************************************************************-->
+        <!-- MAIN ***************************************************************************************************-->
+        <!--*********************************************************************************************************-->
+
+        <main id="ts-main">
+            <!--PAGE TITLE
+            =========================================================================================================-->
+            <section id="page-title">
+                <div class="container">
+                    <div class="ts-title">
+                        <h1>Регистрация<h1>
+                    </div>
+                </div>
+            </section>
+
+            <!--LOGIN / REGISTER SECTION
+            =========================================================================================================-->
+            <section id="login-register">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+
+                            <!--LOGIN / REGISTER TABS
+                            =========================================================================================-->
+                            <ul class="nav nav-tabs" id="login-register-tabs" role="tablist">
+
+                                <!--Login tab-->
+                                <li class="nav-item">
+                                    <a class="nav-link" id="login-tab" href="/account/login" >
+                                        <h3>Вход</h3>
+                                    </a>
+                                </li>
+
+                                <!--Register tab-->
+                                <li class="nav-item">
+                                    <a class="nav-link active show" id="register-tab" data-toggle="tab" href="account/register" role="tab" aria-controls="register" aria-selected="false">
+                                        <h3>Регистрация</h3>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <!--TAB CONTENT
+                            =========================================================================================-->
+                            <div class="tab-content">
+
+                                <!--REGISTER TAB
+                                =====================================================================================-->
+                                <div class="tab-pane active show" id="register" role="tabpanel" aria-labelledby="register-tab">
+
+                                    <!--Register tab-->
+                                    <form method="POST" action="" class="ts-form" id="form-register">
+                                        {% csrf_token %}
+                                        <!--Name-->
+                                        <div class="form-group">
+                                            {{ form.username }}
+                                        </div>
+
+                                        <!--Email-->
+                                        <div class="form-group">
+                                            {{ form.email }}
+                                        </div>
+
+                                        <!--Password-->
+                                        <div class="input-group ts-has-password-toggle">
+                                            {{ form.password1 }}
+                                            <div class="input-group-append">
+                                                <a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!--Repeat Password-->
+                                        <div class="input-group ts-has-password-toggle">
+                                           {{ form.password2 }}
+                                            <div class="input-group-append">
+                                                <a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--Submit button-->
+                                        <button type="submit" class="btn btn-primary" name="Create User"> Регистрация </button>
+
+                                    </form>
+
+                                </div>
+                                <!--end #register.tab-pane-->
+                            </div>
+                            <!--end tab-content-->
+                            <p class="red">{{ form.errors }}</p>
+                        </div>
+                        <!--end offset-4.col-md-4-->
+
+                    </div>
+                    <!--end row-->
+                </div>
+
+                <!--end container-->
+            </section>
+
+
+        </main>
+        <!--end #ts-main-->
+
+
+    </div>
+    <!--end page-->
+
+    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
+    <!-- <script src="assets/js/popper.min.js" %}'></script>-->
+    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+
+</body>
+
+</html>

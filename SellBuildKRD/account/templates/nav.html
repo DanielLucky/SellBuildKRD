@@ -1,11 +1,6 @@
 <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
     <div class="container">
 
-        <!--Brand Logo-->
-        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
-            <img src="assets/img/logo.png" alt="">
-        </a>
-
         <!--Responsive Collapse Button-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,28 +30,26 @@
             <ul class="navbar-nav ml-auto">
                  {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
-                    <a class="p-2 text-dark" href="{% url 'password_change' %}">Изменить пароль</a>
-
+                    <a class="nav-link text-dark" href="">Привет, {{ request.user }}!</a>
                 </li>
 
                 <!--REGISTER (Main level)
                 =============================================================================================-->
                 <li class="nav-item">
-                    <a class="p-2 text-dark" href="{% url 'logout' %}">Выйти</a>
+                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
                 </li>
 
                 {% else %}
                 <!--LOGIN (Main level)
                 =============================================================================================-->
                 <li class="nav-item">
-                    <a class="p-2 text-dark" href="{% url 'login' %}">Войти</a> |
+                    <a class="nav-link" href="/account/login">Войти</a>
                 </li>
 
                 <!--REGISTER (Main level)
                 =============================================================================================-->
                 <li class="nav-item">
-                    <a class="p-2 text-dark" href="{% url 'signup' %}">Регистрация</a>
+                    <a class="nav-link text-dark" href="{% url 'signup' %}">Регистрация</a>
                 </li>
                 {% endif %}
                 <!--SUBMIT (Main level)
@@ -75,3 +68,7 @@
     </div>
     <!--end container-->
 </nav>
+
+<header id="ts-header" class="fixed-top">
+<!--end #ts-primary-navigation.navbar-->
+</header>

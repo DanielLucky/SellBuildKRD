@@ -1,0 +1,275 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/leaflet.css">
+    <link rel="stylesheet" href="assets/css/style.css"> {% load static %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
+
+    <title>Личный кабинет</title>
+    <style type="text/css">
+        .card-img {
+            object-fit: cover;
+            width: 150px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+<nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+    <div class="container">
+
+        <!--Brand Logo-->
+        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
+            <img src="assets/img/logo.png" alt="">
+        </a>
+
+        <!--Responsive Collapse Button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Collapsing Navigation-->
+        <div class="collapse navbar-collapse" id="navbarPrimary">
+
+            <!--LEFT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/">Главная</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="/account/detail">Личный кабинет</a>
+                </li>
+
+
+            </ul>
+            <!--end Left navigation main level-->
+
+            <!--RIGHT NAVIGATION MAIN LEVEL
+            =================================================================================================-->
+            <ul class="navbar-nav ml-auto">
+                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!!!</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
+                </li>
+
+                {% else %}
+                <!--LOGIN (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">Войти</a>
+                </li>
+
+                <!--REGISTER (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
+                </li>
+                {% endif %}
+                <!--SUBMIT (Main level)
+                =============================================================================================-->
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary btn-sm m-1 px-3" href="/account/submit">
+                        <i class="fa fa-plus small mr-2"></i> Разместить объявление
+                    </a>
+                </li>
+
+            </ul>
+            <!--end Right navigation-->
+
+        </div>
+        <!--end navbar-collapse-->
+    </div>
+    <!--end container-->
+</nav>
+    <!-- WRAPPER
+    =================================================================================================================-->
+    <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+        <!--*********************************************************************************************************-->
+        <!--HEADER **************************************************************************************************-->
+        <!--*********************************************************************************************************-->
+        <header id="ts-header" class="fixed-top">
+
+        </header>
+        <!--end Header-->
+
+        <!--*********************************************************************************************************-->
+        <!-- MAIN ***************************************************************************************************-->
+        <!--*********************************************************************************************************-->
+
+        <main id="ts-main">
+
+
+
+
+
+            <!--ITEMS LISTING & SEARCH
+            =========================================================================================================-->
+            <section id="items-listing-and-search">
+                <div class="container">
+                    <div class="row flex-wrap-reverse">
+
+                        <!--LEFT SIDE
+                        =============================================================================================-->
+                        <div class="col-md-8">
+
+
+                            <!--TAB CONTENT
+                            =========================================================================================-->
+                            <div class="tab-content">
+
+                                <!--PROPERTIES TAB
+                                =====================================================================================-->
+                                <div class="tab-pane active" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+
+                                    <!--DISPLAY CONTROL
+                                    =================================================================================-->
+                                    <section id="display-control-items">
+                                        <div class="clearfix">
+
+                                        </div>
+                                        <!--end container-->
+                                    </section>
+
+                                    <!--ITEMS LISTING
+                                    =================================================================================-->
+                                    <section id="items-listing">
+                                        <!--Item-->
+                                        {% if targets is not  None %}
+                                        {% for target in targets %}
+                                        <div class="card ts-item ts-item__list ts-card">
+
+                                            <!--Card Image-->
+
+                                            <a href="/{{target.pk}}" class="card-img" data-bg-image="{{ target.headerImage }}">
+                                                <img src="/media/{{ target.headerImage }}" class="card-img"></a>
+
+                                            <div class="card-body ">
+                                                <figure class="ts-item__info ">
+                                                    <h4>{{ target.nameSell }}</h4>
+                                                    <p>{{target.telephone | phone2numeric}}</p>
+                                                    <aside>
+                                                        <i class="fa fa-map-marker mr-2 "></i> {{ target.address }}
+                                                    </aside>
+                                                </figure>
+                                                <div class="ts-item__info-badge ">
+                                                    ₽ {{target.price}}
+                                                </div>
+
+                                                <div class="ts-description-lists ">
+                                                    <dl>
+                                                        <dt>Площадь</dt>
+                                                        <dd>{{target.totalArea}}м<sup>2</sup></dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>Жилая пл.</dt>
+                                                        <dd>{{target.livingArea}}м<sup>2</sup></dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>Пл. Кухни</dt>
+                                                        <dd>{{target.kitchenArea}}м<sup>2</sup></dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>Кол-во комнат</dt>
+                                                        <dd>{{target.numberOf_rooms}}</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>Этаж/Из</dt>
+                                                        <dd>{{target.floor}} / {{target.totalFloor}}</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>Отделка</dt>
+                                                        <dd>{{target.furnish}}</dd>
+                                                    </dl>
+
+                                                </div>
+
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="delete" value="{{target.pk}}">
+                                                    <input type="submit" value="Удалить" class="btn" action="">
+                                                </form>
+
+                                            </div>
+
+                                            <!--Card Footer-->
+
+                                            <a href="/{{target.pk}}" class="card-footer">
+                                                <span class="ts-btn-arrow">Еще</span>
+
+                                            </a>
+
+
+
+                                        </div>
+                                        {% endfor %}
+                                        {% else %}
+                                        <h1><a href="/account/submit">Добавить объявление</a></h1>
+                                        {%endif%}
+
+                                    </section>
+
+                                </div>
+                                <!--end #properties-->
+
+                                <!--AGENTS TAB
+                                =====================================================================================-->
+                                <div class="tab-pane" id="agents" role="tabpanel" aria-labelledby="agents-tab">
+
+
+
+                                </div>
+                                <!--end #agents-->
+
+                            </div>
+                            <!--end tab-content-->
+
+                        </div>
+                        <!--end col-md-8 / left side -->
+
+
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <!--end #ts-main-->
+
+    </div>
+    <!--end page-->
+
+    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
+    <script src='{% static "assets/js/popper.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.magnific-popup.min.js" %}'></script>
+    <script src='{% static "assets/js/leaflet.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+    <script src='{% static "assets/js/map-leaflet.js" %}'></script>
+
+</body>
+
+</html>

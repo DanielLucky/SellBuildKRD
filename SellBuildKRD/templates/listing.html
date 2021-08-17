@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,8 @@
    }
    </style>
 
-    <body>
+
+<body>
     <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
     <div class="container">
@@ -75,7 +76,7 @@
                 <!--REGISTER (Main level)
                 =============================================================================================-->
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
+                    <a class="nav-link text-dark" href="{% url 'signup' %}">Регистрация</a>
                 </li>
                 {% endif %}
                 <!--SUBMIT (Main level)
