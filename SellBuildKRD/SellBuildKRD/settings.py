@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['192.168.87.100', 'lucky-spb.online', '127.0.0.1']
 INSTALLED_APPS = [
     'account',
     'Sell',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,3 +145,5 @@ LOGIN_REDIRECT_URL = "/account/detail/"
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+SITE_ID = 1
