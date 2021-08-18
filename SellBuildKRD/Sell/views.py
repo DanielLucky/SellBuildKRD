@@ -32,3 +32,16 @@ def sell(request, id_item):
     return render(request, "detail.html", {"sell": info, 'images': images})
 
 
+def page_not_found(request, exception):     # page 404
+    return render(
+        request,
+        "page_fail/404.html",
+        {"path": request.path},
+        status=404
+    )
+
+
+def server_error(request):      # page 500
+    return render(request, "page_fail/500.html", status=500)
+
+

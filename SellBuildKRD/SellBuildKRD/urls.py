@@ -13,11 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import django
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404, handler500
+
+
+handler404 = "Sell.views.page_not_found"
+handler500 = "Sell.views.server_error"
+
 
 urlpatterns = [
     path("", include("Sell.urls")),
@@ -26,4 +32,5 @@ urlpatterns = [
     path("account/", include("django.contrib.auth.urls")),
     path('admin/', admin.site.urls),
     path('about', include('django.contrib.flatpages.urls'))
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

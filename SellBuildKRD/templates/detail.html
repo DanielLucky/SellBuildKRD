@@ -1,299 +1,161 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %} {{sell.0.nameSell}} {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="ThemeStarz">
 
-    <!--CSS -->
-    {% load static %}
-    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/font-awesome/css/fontawesome-all.min.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/css/leaflet.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'>
-
-    <title>{{sell.0.nameSell}}</title>
- <style type="text/css">
-   .row {
+{% block content %}
+<style type="text/css">
+.row {
     padding-left: 15px;
-   }
-   [data-bg-image] {
+}
+[data-bg-image] {
     background-size: contain;
     background-position: 50%;
     background-repeat: no-repeat;
 }
-
 </style>
-
-</head>
-
-<body>
-    <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+<!--PAGE TITLE=========================================================================================================-->
+<section id="page-title">
     <div class="container">
 
-        <!--Brand Logo-->
-        <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
-            <img src="assets/img/logo.png" alt="">
-        </a>
+        <div class="d-block d-sm-flex justify-content-between">
 
-        <!--Responsive Collapse Button-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!--Title-->
+            <div class="ts-title mb-0">
+                <h1>{{sell.0.nameSell}}</h1>
+                <h5 class="ts-opacity__90">
+                    <i class="fa fa-map-marker text-primary"></i> {{ sell.0.address }}
+                </h5>
+            </div>
 
-        <!--Collapsing Navigation-->
-        <div class="collapse navbar-collapse" id="navbarPrimary">
-
-            <!--LEFT NAVIGATION MAIN LEVEL
-            =================================================================================================-->
-            <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link mr-2" href="/">Главная</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link mr-2" href="/account/detail">Личный кабинет</a>
-                </li>
-
-
-            </ul>
-            <!--end Left navigation main level-->
-
-            <!--RIGHT NAVIGATION MAIN LEVEL
-            =================================================================================================-->
-
-            <ul class="navbar-nav ml-auto">
-                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    </span><a class="nav-link text-dark" href="">Привет, {{ request.user }}!</a>
-                </li>
-
-                <!--REGISTER (Main level)
-                =============================================================================================-->
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/account/logout">Выход</a>
-                </li>
-
-                {% else %}
-                <!--LOGIN (Main level)
-                =============================================================================================-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/account/login">Войти</a>
-                </li>
-
-                <!--REGISTER (Main level)
-                =============================================================================================-->
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/account/register">Регистрация</a>
-                </li>
-                {% endif %}
-                <!--SUBMIT (Main level)
-                =============================================================================================-->
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary btn-sm m-1 px-3" href="/account/submit">
-                        <i class="fa fa-plus small mr-2"></i> Разместить объявление
-                    </a>
-                </li>
-
-            </ul>
-            <!--end Right navigation-->
+            <!--Price-->
+            <h3>
+                <span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">₽ {{ sell.0.price }}</span>
+            </h3>
 
         </div>
-        <!--end navbar-collapse-->
+
     </div>
-    <!--end container-->
-</nav>
-    <!-- WRAPPER
-    =================================================================================================================-->
-    <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+</section>
 
-        <!--*********************************************************************************************************-->
-        <!--HEADER **************************************************************************************************-->
-        <!--*********************************************************************************************************-->
-        <header id="ts-header" class="fixed-top"></header>
+<!--CONTENT=========================================================================================================-->
+<section id="content">
+    <div class="container">
+        <div class="row flex-wrap-reverse">
 
-        <!-- SECONDARY NAVIGATION
-        =============================================================================================================-->
-        <nav id="ts-secondary-navigation" class="navbar p-0">
-        </nav>
-        <!--end navbar-nav-->
-    </div>
-    <!--end container-->
+            <!--LEFT SIDE
+                =============================================================================================-->
+            <div class="col-md-5 col-lg-4">
 
+                <!--DETAILS
+                    =========================================================================================-->
+                <section>
+                    <h3>Общая информация</h3>
+                    <div class="ts-box">
 
-    <main id="ts-main">
+                        <dl class="ts-description-list__line mb-0">
 
+                            <dt>ID:</dt>
+                            <dd>#{{sell.0.pk}}</dd>
 
-        <!--PAGE TITLE
-            =========================================================================================================-->
-        <section id="page-title">
-            <div class="container">
+            {% if sell.0.district is not Null %}
+            <dt>Район:</dt>
+                            <dd>{{sell.0.district}}</dd>
+            {% endif %}
 
-                <div class="d-block d-sm-flex justify-content-between">
+                            <dt>Адрес:</dt>
+                            <dd>{{sell.0.address}}</dd>
 
-                    <!--Title-->
-                    <div class="ts-title mb-0">
-                        <h1>{{sell.0.nameSell}}</h1>
-                        <h5 class="ts-opacity__90">
-                            <i class="fa fa-map-marker text-primary"></i> {{ sell.0.address }}
-                        </h5>
+                            <dt>Общая пл.:</dt>
+                            <dd>{{ sell.0.totalArea}} м<sup>2</sup></dd>
+
+            {% if sell.0.livingArea is not Null %}
+                            <dt>Жилая пл.:</dt>
+                            <dd>{{sell.0.livingArea}} м<sup>2</sup></dd>
+                            {% endif %}
+
+            {% if sell.0.kitchenArea is not Null %}
+                            <dt>Пл. Кухни: </dt>
+                            <dd>{{sell.0.kitchenArea}} м<sup>2</sup></dd>
+                            {% endif %}
+
+                            <dt>Этаж/Из:</dt>
+                            <dd>{{sell.0.floor}} / {{sell.0.totalFloor}}</dd>
+
+                            <dt>Кол-во комнат:</dt>
+                            <dd>{{sell.0.numberOf_rooms}}</dd>
+
+            {% if sell.0.furnish is not Null %}
+                            <dt>Ремонт:</dt>
+                            <dd>{{sell.0.furnish}}</dd>
+                            {% endif %}
+
+                            <dt>Дата публикации:</dt>
+                            <dd>{{sell.0.pub_date | date:"Y-m-d H:i:s"}}</dd>
+                            <hr>
+                            <h4>Контакт агента</h4>
+                            <dt>Агент:</dt>
+                            <dd>{{sell.0.author}}</dd>
+                            <dt>Телефон:</dt>
+                            <dd>{{sell.0.telephone}}</dd>
+                        </dl>
+
                     </div>
+                </section>
 
-                    <!--Price-->
-                    <h3>
-                        <span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">₽ {{ sell.0.price }}</span>
-                    </h3>
 
-                </div>
+
 
             </div>
-        </section>
+            <!--end col-md-4-->
 
-        <!--CONTENT
-            =========================================================================================================-->
-        <section id="content">
-            <div class="container">
-                <div class="row flex-wrap-reverse">
+            <!--RIGHT SIDE
+                =============================================================================================-->
+            <div class="col-md-7 col-lg-8">
 
-                    <!--LEFT SIDE
-                        =============================================================================================-->
-                    <div class="col-md-5 col-lg-4">
 
-                        <!--DETAILS
-                            =========================================================================================-->
-                        <section>
-                            <h3>Общая информация</h3>
-                            <div class="ts-box">
+                <!--GALLERY CAROUSEL
+                =============================================================================================-->
+                <section id="gallery-carousel position-relative">
 
-                                <dl class="ts-description-list__line mb-0">
+                    <h3>Галерея</h3>
 
-                                    <dt>ID:</dt>
-                                    <dd>#{{sell.0.pk}}</dd>
-
-				    {% if sell.0.district is not Null %}
-				    <dt>Район:</dt>
-                                    <dd>{{sell.0.district}}</dd>
-				    {% endif %}
-
-                                    <dt>Адрес:</dt>
-                                    <dd>{{sell.0.address}}</dd>
-
-                                    <dt>Общая пл.:</dt>
-                                    <dd>{{ sell.0.totalArea}} м<sup>2</sup></dd>
-                                    
-				    {% if sell.0.livingArea is not Null %}
-                                    <dt>Жилая пл.:</dt>
-                                    <dd>{{sell.0.livingArea}} м<sup>2</sup></dd>
-                                    {% endif %}
-                                    
-			 	    {% if sell.0.kitchenArea is not Null %}
-                                    <dt>Пл. Кухни: </dt>
-                                    <dd>{{sell.0.kitchenArea}} м<sup>2</sup></dd>
-                                    {% endif %}
-
-                                    <dt>Этаж/Из:</dt>
-                                    <dd>{{sell.0.floor}} / {{sell.0.totalFloor}}</dd>
-
-                                    <dt>Кол-во комнат:</dt>
-                                    <dd>{{sell.0.numberOf_rooms}}</dd>
-                                    
-				    {% if sell.0.furnish is not Null %}
-                                    <dt>Ремонт:</dt>
-                                    <dd>{{sell.0.furnish}}</dd>
-                                    {% endif %}
-
-                                    <dt>Дата публикации:</dt>
-                                    <dd>{{sell.0.pub_date | date:"Y-m-d H:i:s"}}</dd>
-                                    <hr>
-                                    <h4>Контакт агента</h4>
-                                    <dt>Агент:</dt>
-                                    <dd>{{sell.0.author}}</dd>
-                                    <dt>Телефон:</dt>
-                                    <dd>{{sell.0.telephone}}</dd>
-                                </dl>
-
+                    <div class="owl-carousel ts-gallery-carousel" data-owl-auto-height="0" data-owl-dots="1" data-owl-loop="1">
+                        {% for image in images %}
+                        <!--Slide-->
+                        <div class="slide">
+                            <div class="ts-image" data-bg-image="/media/{{image.imageSell}}">
+                                <a href="/media/{{image.imageSell}}" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
                             </div>
-                        </section>
-
-
-
+                        </div>
+                        {% endfor %}
 
                     </div>
-                    <!--end col-md-4-->
 
-                    <!--RIGHT SIDE
-                        =============================================================================================-->
-                    <div class="col-md-7 col-lg-8">
+                </section>
 
+                <!--DESCRIPTION
+                    =========================================================================================-->
+                <section id="description">
 
-                        <!--GALLERY CAROUSEL
-                        =============================================================================================-->
-                        <section id="gallery-carousel position-relative">
+                    <h3>Описание</h3>
 
-                            <h3>Галерея</h3>
+                    <p>
+                        {{sell.0.specifications}}
+                    </p>
 
-                            <div class="owl-carousel ts-gallery-carousel" data-owl-auto-height="0" data-owl-dots="1" data-owl-loop="1">
-                                {% for image in images %}
-                                <!--Slide-->
-                                <div class="slide">
-                                    <div class="ts-image" data-bg-image="/media/{{image.imageSell}}">
-                                        <a href="/media/{{image.imageSell}}" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
-                                    </div>
-                                </div>
-                                {% endfor %}
-
-                            </div>
-
-                        </section>
-
-                        <!--DESCRIPTION
-                            =========================================================================================-->
-                        <section id="description">
-
-                            <h3>Описание</h3>
-
-                            <p>
-                                {{sell.0.specifications}}
-                            </p>
-
-                        </section>
+                </section>
 
 
 
 
-                    </div>
-                    <!--end col-md-8-->
-
-                </div>
-                <!--end row-->
             </div>
-            <!--end container-->
-        </section>
+            <!--end col-md-8-->
+
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</section>
 
 
-
-    </main>
-    <!--end #ts-main-->
-
-    <!--*********************************************************************************************************-->
-    <!--************ FOOTER *************************************************************************************-->
-    <!--*********************************************************************************************************-->
-
-
-
-    <!--end page-->
-
-    <script src='{% static "assets/js/jquery-3.3.1.min.js" %}'></script>
-    <script src='{% static "assets/js/popper.min.js" %}'></script>
-    <script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
-    <script src='{% static "assets/js/owl.carousel.min.js" %}'></script>
-    <script src='{% static "assets/js/jquery.magnific-popup.min.js" %}'></script>
-    <script src='{% static "assets/js/leaflet.js" %}'></script>
-    <script src='{% static "assets/js/custom.js" %}'></script>
-    <script src='{% static "assets/js/map-leaflet.js" %}'></script>
-
-</body>
-
-</html>
+{% endblock %}

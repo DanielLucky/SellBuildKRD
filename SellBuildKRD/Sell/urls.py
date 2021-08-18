@@ -1,5 +1,4 @@
 from django.urls import path
-
 from . import views
 
 urlpatterns = [
@@ -7,3 +6,5 @@ urlpatterns = [
     # path("page/<int:page>", views.index, name="index"),
     path("<int:id_item>", views.sell),
 ]
+
+
