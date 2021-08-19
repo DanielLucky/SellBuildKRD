@@ -28,7 +28,7 @@ handler500 = "Sell.views.server_error"
 urlpatterns = [
     path("", include("Sell.urls")),
     path("page/", include("Sell.urls")),
-    path('account/', include('account.urls')),
+    path('account/', include('account.urls'), name='account'),
     path("account/", include("django.contrib.auth.urls")),
     path('admin/', admin.site.urls),
     path('about', include('django.contrib.flatpages.urls'))

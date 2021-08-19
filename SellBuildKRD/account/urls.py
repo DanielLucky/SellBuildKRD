@@ -9,6 +9,6 @@ urlpatterns = [
     # url('logout/', views.logoutUser, name='logout'),
     url('contact/', views.ContactSendView, name='contact'),
     url('submit/', views.submitSell, name='submit'),
-    url('detail/', views.agencyDetail, name='agencyDetail'),
-    path("signup/", views.SignUp.as_view(), name="signup")
+    path("signup/", views.SignUp.as_view(), name="signup"),
+    path('detail/<str:seller>', views.agencyDetail, name='agencyDetail'),
 ]

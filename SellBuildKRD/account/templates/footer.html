@@ -1,3 +1,78 @@
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <p class="m-0 text-dark text-center ">Сайт по продаже недвижимости в Краснодаре и Краснодарском крае © {{year}}, все права защищены.</p>
-</footer>
+
+<footer id="ts-footer">
+
+        <section id="ts-footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <p class="mb-4">
+                            Сайт предназначен для размещения объявлений о продаже или аренде недвижимости  в
+                            Краснодаре и Краснодарском крае. Проект находится на стадии разработки, если у Вас
+                            есть предложения по развитию или Вы столкнулись с некоторыми сложностями при использовании
+                            сайта, пожалуйста заполните ворму ниже.
+                        </p>
+                        <a href="account/contact/" class="btn btn-outline-dark mb-4">Заполнить форму</a>
+                    </div>
+                    <!--end col-md-6-->
+                    <div class="col-md-2">
+                        <h4>Навигация</h4>
+                        <nav class="nav flex-row flex-md-column mb-4">
+                            <a href="#" class="nav-link">О нас</a>
+                            <a href="/account/login" class="nav-link">Войти</a>
+                            <a href="/account/detail/{{request.user}}" class="nav-link">Личный кабинет</a>
+                            <a href="/" class="nav-link">Главная</a>
+                            <a href="/account/signup" class="nav-link">Регистрация</a>
+                        </nav>
+                    </div>
+                    <!--end col-md-2-->
+                    <div class="col-md-4">
+                        <h4>Контакты</h4>
+                        <address class="ts-text-color-light">
+
+                            <strong>Email: </strong>
+                            <a href="#" class="btn-link">danil.spb.it@gmail.com</a>
+                            <br>
+                            <strong>Phone:</strong>
+                            +7 911-916-94-51
+                            <br>
+
+                        </address>
+                        <!--end address-->
+                    </div>
+                    <!--end col-md-4-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end ts-footer-main-->
+
+        <section id="ts-footer-secondary">
+            <div class="container">
+                <div class="ts-copyright">Сайт по продаже недвижимости в Краснодаре и Краснодарском крае © {{year}}, все права защищены.</div>
+                <!--end ts-copyright-->
+                <div class="ts-footer-nav">
+                    <nav class="nav">
+                        <a href="#" class="nav-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </nav>
+                    <!--end nav-->
+                </div>
+                <!--end ts-footer-nav-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end ts-footer-secondary-->
+
+    </footer>

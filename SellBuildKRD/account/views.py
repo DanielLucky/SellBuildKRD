@@ -2,6 +2,7 @@ from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, ImageForm, ContactSendForm
@@ -117,12 +118,14 @@ def submitSell(request):
             return render(request, 'account/detail.html', {'form': form})
 
 
-@login_required(login_url='/account/login')
-def agencyDetail(request):
+@login_required(login_url='/account/login', redirect_field_name=None)
+def agencyDetail(request, seller):
+
     if request.method == 'GET':
         sellModel = apps.get_model('Sell', 'Sell')
-        targets = sellModel.objects.filter(author=request.user.pk).order_by('-pk')
-        return render(request, 'account/agency-detail.html', {'targets': targets})
+        user_info = User.objects.get(username=seller)
+        targets = sellModel.objects.filter(author=User.objects.get(username=seller).pk).order_by('-pk')
+        return render(request, 'account/agency-detail.html', {'targets': targets, 'userinfo': user_info})
 
     elif request.method == 'POST':
         Sell = apps.get_model('Sell', 'Sell')
