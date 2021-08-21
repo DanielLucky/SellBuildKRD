@@ -7,7 +7,6 @@ SellBuildKRD/db.sqlite3
 !/SellBuildKRD/Sell/migrations/
 !/SellBuildKRD/image/
 !/SellBuildKRD/maapp_models.png
-!/SellBuildKRD/image/
 
 SellBuildKRD/account/__pycache__/
 

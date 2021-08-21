@@ -199,7 +199,7 @@ def agencyDetail(request, seller):
         Sell = apps.get_model('Sell', 'Sell')
         Sell.objects.get(pk=request.POST.get('delete')).delete()
 
-        return redirect('/account/detail')
+        return redirect(f'/account/detail/{seller}')
 
 
 def submitSell_upp(request, id_item):
