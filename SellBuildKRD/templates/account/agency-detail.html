@@ -7,6 +7,31 @@
             width: 150px;
             height: 100px;
         }
+        .btn_a{
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: #F8F8FF;
+            padding: 9px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 2px;
+            user-select: none;
+        }
+        .btn_b{
+            background-color: #27a7bd;
+            border: none;
+            color: #F8F8FF;
+            padding: 9px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 2px;
+            user-select: none;
+
+        }
 
     input[type=button], input[type=submit]{
       background-color: #FA8072;
@@ -114,9 +139,15 @@
                                                 {% if request.user == target.author %}
                                                 <form method="post">
                                                     {% csrf_token %}
+                                                    <a href="/account/submit_upp/{{ target.pk }}" class="btn_b">Поднять</a>
+                                                    <a href="/account/submit_edit/{{ target.pk }}" class="btn_a">Редактировать</a>
                                                     <input type="hidden" name="delete" value="{{target.pk}}">
                                                     <input type="submit" value="Удалить" class="btn" action="">
+
                                                 </form>
+
+
+
                                                 {%endif%}
 
 

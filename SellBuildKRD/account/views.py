@@ -7,6 +7,7 @@ from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, ImageForm, ContactSendForm
 from .models import ContactSend
+import datetime as dt
 
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -14,7 +15,7 @@ from django.urls import reverse_lazy
 
 class SignUp(CreateView):
     form_class = CreateUserForm
-    success_url = reverse_lazy("login") #  где login — это параметр "name" в path()
+    success_url = reverse_lazy("login")  # где login — это параметр "name" в path()
     template_name = "signup.html"
 
 
@@ -25,8 +26,8 @@ def ContactSendView(request):
         form = ContactSendForm(request.POST)
         if form.is_valid():
             ContactSend.objects.create(name_agent=request.user,
-                                           theme=request.POST.get('theme'),
-                                           message=request.POST.get('message'),)
+                                       theme=request.POST.get('theme'),
+                                       message=request.POST.get('message'), )
 
             return render(request, 'thx.html')
 
@@ -105,6 +106,7 @@ def submitSell(request):
                                          status=request.POST.get('status'),
                                          author=request.user,
                                          district=request.POST.get('district'),
+                                         pub_date=dt.datetime.now(),
                                          )
 
             for f in request.FILES.getlist('imageSell'):
@@ -118,18 +120,94 @@ def submitSell(request):
             return render(request, 'account/detail.html', {'form': form})
 
 
+def submitSell_edit(request, id_item):
+    Image = apps.get_model('Sell', 'Image')
+    Sell = apps.get_model('Sell', 'Sell')
+    # zapr = Sell.objects.filter(pk=id_item)
+    # print(request.user.pk == list(zapr.values_list('author_id', flat=True))[0])
+    if request.user.pk == list(Sell.objects.filter(pk=id_item).values_list('author_id', flat=True))[0]:  # Проверка автора поста перед началом редактирования объявления
+        if request.method == 'GET':
+            info = Sell.objects.get(pk=id_item)
+            images = Image.objects.filter(sellId=id_item)
+            return render(request, "account/submit_edit.html", {"sell": info, 'images': images})
+        elif request.method == 'POST':
+            form = ImageForm()
+            form = ImageForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                edit_item = Sell.objects.get(pk=id_item)
+                if bool(request.POST.get('Delete_headerImage')):
+                    edit_item.headerImage = ''
+                if bool(request.POST.get('Delete_imageSell')):
+                    Image.objects.filter(sellId=id_item).delete()
+
+                if request.FILES.get('headerImage') is not None:  # NEW
+                    print('request.FILES.get("headerImage") is not None')
+                    edit_item.headerImage = request.FILES.get('headerImage')
+
+                # Редактируем имя объявления
+                nameSell = request.POST.get('status') + \
+                           ' ' + request.POST.get('numberOf_rooms') + \
+                           'к. ' + request.POST.get('type') + ' ' + request.POST.get('totalArea') + \
+                           'м. ' + request.POST.get('floor').lower() + '/' + \
+                           request.POST.get('totalFloor') + ' эт.'
+                print(nameSell)
+                print(request.POST.get('Delete_headerImage'))
+                print(request.POST.get('Delete_imageSell'))
+                edit_item.nameSell = nameSell
+                edit_item.specifications = request.POST.get('specifications')
+                edit_item.price = request.POST.get('price')
+                edit_item.address = request.POST.get('address')
+                edit_item.telephone = request.POST.get('telephone')
+                edit_item.floor = request.POST.get('floor')
+                edit_item.totalFloor = request.POST.get('totalFloor')
+                edit_item.numberOf_rooms = request.POST.get('numberOf_rooms')
+                edit_item.totalArea = request.POST.get('totalArea')
+                edit_item.livingArea = request.POST.get('livingArea')
+                edit_item.kitchenArea = request.POST.get('kitchenArea')
+                edit_item.furnish = request.POST.get('furnish')
+                edit_item.type = request.POST.get('type')
+                edit_item.status = request.POST.get('status')
+                edit_item.author = request.user
+                edit_item.district = request.POST.get('district')
+
+                edit_item.save()
+                if request.FILES.get('imageSell') is not None:
+                    # print('request.FILES.get("imageSell") is not None')
+                    Image.objects.filter(sellId=id_item).delete()
+                    for f in request.FILES.getlist('imageSell'):
+                        data = f.read()
+                        photo = Image(sellId=edit_item)
+                        print(edit_item.pk)
+                        photo.imageSell.save(str(edit_item.pk) + '/' + f.name, ContentFile(data))
+                        photo.save()
+                    #return redirect(f'/{edit_item.pk}')
+                return redirect(f'/{edit_item.pk}')
+    else:
+        return redirect('/')
+
+
 @login_required(login_url='/account/login', redirect_field_name=None)
 def agencyDetail(request, seller):
-
     if request.method == 'GET':
         sellModel = apps.get_model('Sell', 'Sell')
         user_info = User.objects.get(username=seller)
-        targets = sellModel.objects.filter(author=User.objects.get(username=seller).pk).order_by('-pk')
+        targets = sellModel.objects.filter(author=User.objects.get(username=seller).pk).order_by('-pub_date')
         return render(request, 'account/agency-detail.html', {'targets': targets, 'userinfo': user_info})
 
     elif request.method == 'POST':
         Sell = apps.get_model('Sell', 'Sell')
-        delete = Sell.objects.get(pk=request.POST.get('delete')).delete()
+        Sell.objects.get(pk=request.POST.get('delete')).delete()
 
         return redirect('/account/detail')
 
+
+def submitSell_upp(request, id_item):
+    Sell = apps.get_model('Sell', 'Sell')
+    item = Sell.objects.get(pk=id_item)
+    if (dt.datetime.now(dt.timezone.utc) - item.pub_date) > dt.timedelta(days=1):
+        item.pub_date = dt.datetime.now(dt.timezone.utc)
+        item.save()
+        return redirect('/about/upper/')
+    else:
+        return redirect('/about/upper_error/')

@@ -9,7 +9,7 @@ User = get_user_model()
 class Sell(models.Model):
     nameSell = models.TextField()
     specifications = models.TextField()
-    pub_date = models.DateTimeField("date published", auto_now=True)
+    pub_date = models.DateTimeField("date published")
     price = models.TextField()
     address = models.TextField(max_length=150)
     telephone = models.TextField()
