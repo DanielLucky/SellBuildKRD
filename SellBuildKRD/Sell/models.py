@@ -26,6 +26,7 @@ class Sell(models.Model):
     status = models.TextField()
     headerImage = models.ImageField(null=True, blank=True, upload_to="images/")
     district = models.TextField(null=True)
+    published_tg = models.BooleanField(default=False)
 
 
 class Image(models.Model):

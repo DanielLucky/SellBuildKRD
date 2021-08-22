@@ -19,3 +19,5 @@ SellBuildKRD/Sell/__pycache__/
 SellBuildKRD/Sell/migrations/
 
 SellBuildKRD/SellBuildKRD/__pycache__/
+!/db.sqlite3
+!/bot_tg_push/config.py
