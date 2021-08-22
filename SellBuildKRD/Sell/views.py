@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Sell, Image
 from django.core.paginator import Paginator
+from django.db.models import Q, F
+import datetime as dt
 
 
 def index(request):
@@ -13,14 +15,36 @@ def index(request):
         return render(request, "listing.html", {"sells": p.page(1)})
     elif request.method == 'POST':
         if request.POST.get('district') == '' \
-                and request.POST.get('price') == ''\
-                and request.POST.get('type') == ''\
+                and request.POST.get('price') == '' \
+                and request.POST.get('type') == '' \
                 and request.POST.get('status') == '':
             sellSearch = Sell.objects.order_by('-pub_date')
 
             return render(request, "listing.html", {"sells": sellSearch})
         else:
-            sellSearch = Sell.objects.order_by('-pub_date').filter(district=request.POST.get('district'), price__lte=request.POST.get('price'), type=request.POST.get('type'), status=request.POST.get('status'))
+
+            sellSearch = Sell.objects.order_by('-pub_date').filter(district=request.POST.get('district'),
+                                                                   price__lte=request.POST.get('price'),
+                                                                   type=request.POST.get('type'),
+                                                                   status=request.POST.get('status'))
+            d = dict(request.POST)
+            del d['csrfmiddlewaretoken']
+            d_new = {}
+            for key in d.keys():
+                if d[key][0] != '':
+                    d_new[key] = d[key][0]
+
+            sellSearch = Sell.objects.all()
+            for value in d_new:
+                if value == 'district':
+                    sellSearch = sellSearch.filter(district=d_new[value])
+                elif value == 'type':
+                    sellSearch = sellSearch.filter(type=d_new[value])
+                elif value == 'status':
+                    sellSearch = sellSearch.filter(status=d_new[value])
+                elif value == 'price':
+                    sellSearch = sellSearch.filter(price__lte=d_new[value])
+            sellSearch.order_by('-pub_date')
 
             return render(request, "listing.html", {"sells": sellSearch})
 
@@ -32,7 +56,7 @@ def sell(request, id_item):
     return render(request, "detail.html", {"sell": info, 'images': images})
 
 
-def page_not_found(request, exception):     # page 404
+def page_not_found(request, exception):  # page 404
     return render(
         request,
         "page_fail/404.html",
@@ -41,7 +65,5 @@ def page_not_found(request, exception):     # page 404
     )
 
 
-def server_error(request):      # page 500
+def server_error(request):  # page 500
     return render(request, "page_fail/500.html", status=500)
-
-
