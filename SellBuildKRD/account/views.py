@@ -205,7 +205,7 @@ def agencyDetail(request, seller):
 def submitSell_upp(request, id_item):
     Sell = apps.get_model('Sell', 'Sell')
     item = Sell.objects.get(pk=id_item)
-    if (dt.datetime.now(dt.timezone.utc) - item.pub_date) > dt.timedelta(days=0):
+    if (dt.datetime.now(dt.timezone.utc) - item.pub_date) > dt.timedelta(days=1):
         item.pub_date = dt.datetime.now(dt.timezone.utc)
         item.published_tg = False
         item.save()
