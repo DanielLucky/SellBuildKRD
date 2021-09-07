@@ -1,0 +1,23 @@
+version: "3"
+
+volumes:
+  db:
+
+services:
+  mysql_db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pass
+      - MYSQL_DATABASE=django
+      - MYSQL_USER=django
+      - MYSQL_PASSWORD=django_pass
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+
+  web_server:
+    build: .
+    restart: always
+    ports:
+      - "80:8000"
+

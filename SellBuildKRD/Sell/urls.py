@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    # path("page/<int:page>", views.index, name="index"),
     path("<int:id_item>", views.sell),
 ]
 
