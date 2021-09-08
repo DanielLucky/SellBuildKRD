@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken import views
 from django.conf.urls import handler404, handler500
 
 
@@ -27,6 +28,7 @@ handler500 = "Sell.views.server_error"
 
 urlpatterns = [
     path("", include("Sell.urls")),
+    path('api-token-auth/', views.obtain_auth_token),
     path("page/", include("Sell.urls")),
     path('account/', include('account.urls'), name='account'),
     path("account/", include("django.contrib.auth.urls")),

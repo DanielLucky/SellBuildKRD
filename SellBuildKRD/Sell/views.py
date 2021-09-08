@@ -1,6 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework.decorators import api_view
 from .models import Sell, Image
 from django.core.paginator import Paginator
+from .serializers import SellSerializer
+import datetime as dt
 
 
 def index(request):
@@ -65,3 +69,19 @@ def page_not_found(request, exception):  # page 404
 
 def server_error(request):  # page 500
     return render(request, "page_fail/500.html", status=500)
+
+
+@api_view(['GET', 'POST'])
+def get_sell(request, id_sell=None):
+    if request.method == 'GET':
+        sell = Sell.objects.filter(pk=id_sell)
+        serializer = SellSerializer(sell, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = SellSerializer(data=request.data)
+        print(type(data))
+        if data.is_valid():
+            data.save()
+            return JsonResponse('sell is add', safe=False)
+        else:
+            return JsonResponse("sell is not add", safe=False)

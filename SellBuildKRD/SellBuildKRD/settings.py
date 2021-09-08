@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['192.168.87.100', 'lucky-spb.online', '127.0.0.1', "testserver"
 INSTALLED_APPS = [
     'account',
     'Sell',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.admin',
@@ -104,6 +106,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
