@@ -28,6 +28,7 @@ handler500 = "Sell.views.server_error"
 
 urlpatterns = [
     path("", include("Sell.urls")),
+    path('api/', include('api.urls')),
     path('api-token-auth/', views.obtain_auth_token),
     path("page/", include("Sell.urls")),
     path('account/', include('account.urls'), name='account'),

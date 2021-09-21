@@ -106,8 +106,7 @@ def submitSell(request):
                                          status=request.POST.get('status'),
                                          author=request.user,
                                          district=request.POST.get('district'),
-                                         pub_date=dt.datetime.now(),
-                                         )
+                                         pub_date=dt.datetime.now(),)
 
             for f in request.FILES.getlist('imageSell'):
                 data = f.read()

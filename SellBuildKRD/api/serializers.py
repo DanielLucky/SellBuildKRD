@@ -1,6 +1,5 @@
+from django.apps import apps
 from rest_framework import serializers
-
-from .models import Sell
 
 
 class SellSerializer(serializers.ModelSerializer):
@@ -8,7 +7,7 @@ class SellSerializer(serializers.ModelSerializer):
         fields = ("nameSell", "specifications", "pub_date", "price", "address", "telephone", "author", "floor",
                   "totalFloor", "numberOf_rooms", "totalArea", "livingArea", "kitchenArea", "furnish", "type",
                   "status", "district", "published_tg")
-        model = Sell
+        model = apps.get_model('Sell', 'Sell')
 
 
 class SellSerializerAdd(serializers.ModelSerializer):
@@ -19,4 +18,4 @@ class SellSerializerAdd(serializers.ModelSerializer):
         fields = ("nameSell", "specifications", "pub_date", "price", "address", "telephone", "author", "floor",
                   "totalFloor", "numberOf_rooms", "totalArea", "livingArea", "kitchenArea", "furnish", "type",
                   "status", "district", "published_tg")
-        model = Sell
+        model = apps.get_model('Sell', 'Sell')

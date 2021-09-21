@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from .models import Sell, Image
 from django.core.paginator import Paginator
-from .serializers import SellSerializer
+from .serializers import SellSerializer, SellSerializerAdd
 import datetime as dt
 
 
@@ -78,10 +78,9 @@ def get_sell(request, id_sell=None):
         serializer = SellSerializer(sell, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
-        data = SellSerializer(data=request.data)
-        print(type(data))
+        data = SellSerializerAdd(data=request.data)
         if data.is_valid():
-            data.save()
+            data.save(nameSell='123', pub_date=dt.datetime.now(), author_id=request.user.pk)
             return JsonResponse('sell is add', safe=False)
         else:
-            return JsonResponse("sell is not add", safe=False)
+            return JsonResponse(data.errors, safe=False)
