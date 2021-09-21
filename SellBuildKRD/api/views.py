@@ -3,10 +3,12 @@ import datetime as dt
 from django.apps import apps
 from django.http import JsonResponse
 from rest_framework import generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
+from rest_framework.throttling import UserRateThrottle
 from .serializers import SellSerializer, SellSerializerAdd
 
 
+@throttle_classes([UserRateThrottle])
 @api_view(['GET', 'POST'])
 def get_sell(request, id_sell=None):
     if request.method == 'GET':
