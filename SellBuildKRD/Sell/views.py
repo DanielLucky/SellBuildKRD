@@ -25,10 +25,6 @@ def index(request):
             return render(request, "listing.html", {"sells": sellSearch})
         else:
 
-            sellSearch = Sell.objects.order_by('-pub_date').filter(district=request.POST.get('district'),
-                                                                   price__lte=request.POST.get('price'),
-                                                                   type=request.POST.get('type'),
-                                                                   status=request.POST.get('status'))
             d = dict(request.POST)
             del d['csrfmiddlewaretoken']
             d_new = {}
@@ -46,9 +42,8 @@ def index(request):
                     sellSearch = sellSearch.filter(status=d_new[value])
                 elif value == 'price':
                     sellSearch = sellSearch.filter(price__lte=d_new[value])
-            sellSearch.order_by('-pub_date')
 
-            return render(request, "listing.html", {"sells": sellSearch})
+            return render(request, "listing.html", {"sells": sellSearch.order_by('-pub_date')})
 
 
 def sell(request, id_item):
