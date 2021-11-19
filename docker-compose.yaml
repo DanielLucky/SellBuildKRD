@@ -1,20 +1,18 @@
 version: "3"
 
 volumes:
-  db:
+  db1:
 
 services:
   db:
     image: mysql
     environment:
-      - MYSQL_PORT=3306
-      - MYSQL_ROOT_HOST=%
       - MYSQL_ROOT_PASSWORD=root_pass
       - MYSQL_DATABASE=django
       - MYSQL_USER=django
       - MYSQL_PASSWORD=django_pass
     volumes:
-      - db:/var/lib/mysql
+      - db1:/var/lib/mysql
     ports:
       - "3306:3306"
 

@@ -87,6 +87,7 @@ DATABASES = {
             'read_default_file': '/home/dl/PycharmProjects/SellBuildKRD/config/db_conf.cnf',
         },
     }
+
 }
 
 # Password validation
